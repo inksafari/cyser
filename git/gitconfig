@@ -1,0 +1,302 @@
+[include]
+    path = ~/.gitconfig.local    # for my username and email address
+	
+[credential]
+    helper = osxkeychain         # for macOS
+
+[help]
+    autocorrect = 1
+
+[core]
+    # attributesfile  = ~/.gitattributes-global
+    commentchar       = ";"
+    editor            = atom --wait
+    excludesfile      = ~/.gitignore-global
+    pager             = less -JFRSX --tabs=4
+    precomposeUnicode = true
+    quotepath         = false
+    sharedRepository  = 0664
+    whitespace        = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+
+[pager]
+    # diff-hightlight ( since Git v2.9 ) or so-fancy/diff-so-fancy
+    # .zshrc: export PATH=$PATH:/usr/share/doc/git/contrib/diff-highlight ( Ubuntu )
+    diff       =  diff-so-fancy | $(git config core.pager)
+    log        =  diff-so-fancy | $(git config core.pager)
+    show       =  diff-so-fancy | $(git config core.pager)
+
+[interactive]
+	diffFilter = "diff-so-fancy"
+
+[gpg]
+    program = gpg2
+    
+[commit]
+    gpgsign = false
+    template = ~/.gitmessage
+    verbose = true
+
+[fetch]
+    prune = true
+
+[filter "lfs"]
+    required = true
+    clean    = git-lfs clean -- %f
+    smudge   = git-lfs smudge -- %f
+
+[filter "media"]
+    required = true
+    clean    = git media clean %f
+    smudge   = git media smudge %f
+
+# https://github.com/motemen/ghq
+#[ghq]
+#    root = ~/src/ghq
+    
+[grep]
+    extendregexp = true 
+
+#[hub]
+#    protocol = https
+
+[log]
+    abbrevCommit = true
+    decorate     = short
+    
+[pretty]
+    # https://git-scm.com/docs/pretty-formats          
+    nice = "format:%C(green)%ad%Creset %C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold blue)[%an]%Creset"
+    # for --relative-date
+    nic2 = "format:%C(cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold)[%an]%Creset %C(green)%ad%Creset"
+    # for `git reflog`
+    relg = "%C(cyan)%h%Creset %gd %gs %Cgreen(%cr)%Creset"
+
+[pull]
+    rebase = true
+
+[push]
+    default = simple
+
+[rebase]
+    autoStash = true
+	autoSquash = true
+
+# ============================================================================
+# Colors / Colours
+# ============================================================================
+
+[color]
+    ui           = auto
+
+[color "branch"]
+    current      = green
+    local        = yellow
+    remote       = cyan
+
+[color "diff"]
+    commit       = green bold
+    frag         = magenta bold
+    meta         = yellow bold
+    new          = green bold
+    old          = red bold
+    whitespace   = red reverse
+
+[color "diff-highlight"]
+    oldNormal    = red bold
+    oldHighlight = red bold 52
+    newNormal    = green bold
+    newHighlight = green bold 22
+
+[color "grep"]
+    filename     = yellow bold
+    linenumber   = green
+    match        = blue bold 
+
+[color "status"]
+    added        = green
+    changed      = yellow
+    untracked    = red
+
+
+# ============================================================================
+# Programs
+# ============================================================================
+
+[gui]
+    fontui = -family \"Consolas\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+    fontdiff = -family \"Consolas\" -size 12 -weight normal -slant roman -underline 0 -overstrike 0
+    commitmsgwidth = 80
+    diffcontext = 10
+    encoding = utf-8
+
+[i18n]
+    logoutputencoding = UTF-8
+
+[diff]
+    algorithm           = patience
+    compactionHeuristic = true
+[diff "nodiff"]
+    command = true
+[diff "utf-16"]
+    textconv = iconv -f utf-16 -t utf-8
+[diff "xml"]
+    textconv = xmllint --format --recover
+[difftool]
+    prompt = false
+
+# Merge Conflict 
+# --------------
+# tools: 
+#       - https://www.slant.co/topics/1324/~diff-tools-for-git
+#       - http://www.deltawalker.com/
+#       - https://yousseb.github.io/meld/
+# [merge]
+# algorithm       = patience
+# conflictstyle   = diff3
+# ff              = only
+# [mergetool]
+# prompt          = false
+# keepBackup      = false
+# keepTemporaries = false
+# [mergetool "meld_diff3"]
+# cmd             = open -W -a Meld --args --auto-merge \"$PWD/$LOCAL\" \"$PWD/$BASE\" \"$PWD/$REMOTE\" --output=\"$PWD/$MERGED\"
+# trustExitCode   = true
+
+# gitweb
+# ------
+#   - https://git-scm.com/docs/git-instaweb
+#   - tools:  git.wiki.kernel.org/index.php/Interfaces,_frontends,_and_tools
+#             github.com/alberthier/git-webui
+[instaweb]
+    browser = chromium
+    httpd   = webrick
+    local   = true
+    port    = 8888
+    
+# ============================================================================
+# Aliases
+# ============================================================================
+
+[url "git@github.com:"]
+    insteadOf = "gh:"
+    insteadOf = "git://github.com"
+    pushInsteadOf = "github:"
+    pushInsteadOf = "git://github.com/"
+    pushInsteadOf = "https://github.com/"
+
+[url "git@gist.github.com:"]
+    insteadOf = "gst:"
+    pushInsteadOf = "gist:"
+    pushInsteadOf = "git://gist.github.com/"
+    pushInsteadOf = "https://gist.github.com/"
+
+[alias]
+    # 
+    # misc ( aliases, status, tags, ... )    
+    #
+    as = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+    get = !git pull --rebase && git submodule update --init --recursive
+    get-ign = "!f() { curl -L -s https://www.gitignore.io/api/$@; }; f"
+    gg = grep --break --heading --line-number
+    rv = remote -v
+    sc = clone --depth=1
+    ss = show-branch --sha1-name
+    st = status --short --branch
+    tags = tag -n1 --list
+
+    #
+    # ls-files
+    #
+    ls-del = ls-files -d
+    ls-mod = ls-files -m
+    ls-new = ls-files --exclude-standard -o
+    ls-ign = ls-files --exclude-standard -o -i
+
+    #            
+    # branch
+    #
+    bm = branch --merged
+    bn = branch --no-merged
+    br = branch --all -vv        # Show all the branches including origin
+    brs = for-each-ref --sort=-committerdate --format="%(committerdate:relative)%09%(refname:short)" refs/heads  
+    del-bm = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+
+    #
+    # git-flow ( https://github.com/{petervanderdoes/gitflow-avh, Wirone/5cc2f380db031a9d94f4eb449db8c72a/ } )
+    #
+
+
+    #
+    # stash ( saved working directory and index )
+    #
+    sth = stash
+    stl = stash list
+    sts = stash show
+    stp = stash pop
+
+    #
+    # checkout
+    #
+    co = checkout
+
+    #
+    # log
+    #   - https://git-scm.com/docs/git-log
+    #   - https://gist.github.com/datagrok/4221767
+    #
+    who   = shortlog --summary --numbered --no-merges
+    last  = log --oneline -1 HEAD
+    today = shortlog --since=midnight
+    week  = shortlog --since=one.week.ago
+    lg = log --graph --topo-order --date=relative --pretty=nic2 --all --boundary # master...dev
+    lt = log --graph --topo-order --date=short --pretty=nice --stat
+    rg = reflog --pretty=relg
+    
+    #
+    # diff                    
+    #       last commit(HEAD) <-[staged]-> index <-[unstaged]-> work tree
+    #           ^-----------------------[changed]-------------------^
+    #
+    df = diff --patch-with-stat             # unstaged    
+    ds = diff --patch-with-stat --cached    # staged
+    dh = diff --patch-with-stat HEAD^ HEAD
+
+    #
+    # merge
+    #
+    # mt = merge tool "meld_diff3"
+    # conflicts = "!$EDITOR $(git diff --name-only --diff-filter=U)" # for Vim
+
+    #
+    # add                        # working tree ( untracked, unstaged ) -> staging area
+    #
+    aa     = add -A
+    ours   = !"f() { git checkout --ours $@ && git add $@; }; f"
+    theirs = !"f() { git checkout --theirs $@ && git add $@; }; f"
+        
+    #
+    # commit                     # staging area ( index / cache ) -> local repo ( HEAD )
+    #
+    cm = commit -m --allow-empty # single line commit message
+    ct = commit                  # with commit template
+
+    #
+    # gitweb
+    #
+    serv = instaweb
+
+    #
+    # reset ( !! )
+    # 
+    umod = checkout $(git ls-files --modified)
+    undo = reset HEAD^ --soft
+    wipe = reset HEAD^ --hard
+    wip2 = reset HEAD^^ --hard
+    wip3 = reaet HEAD~3 --hard
+
+    #    
+    # push
+    #
+    publish = !"git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
+    unpublish = !"git push origin :$(git rev-parse --abbrev-ref HEAD)"
+    

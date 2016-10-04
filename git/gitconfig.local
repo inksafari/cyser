@@ -1,0 +1,8 @@
+[user]
+    name  = Tzu Yu Lin
+    email = inksafari@users.noreply.github.com
+    # signingkey <gpg-key-id>
+[github]
+    user  = inksafari
+    # https://help.github.com/articles/creating-an-access-token-for-command-line-use/
+    # token = GITHUB_TOKEN
