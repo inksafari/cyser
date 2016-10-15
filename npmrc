@@ -1,0 +1,12 @@
+# https://docs.npmjs.com/files/npmrc
+# https://docs.npmjs.com/misc/config
+# https://github.com/camwiegert/dotfiles
+
+prefix=${HOME}/.local/node
+tmp=${HOME}/tmp/npm
+cache=$XDG_CACHE_HOME/npm
+loglevel=error
+
+init-author-name=Tzu-Yu Lin
+init-license=MIT
+init-version=0.0.1

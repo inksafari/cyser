@@ -1,0 +1,23 @@
+Host *
+    ForwardAgent no
+    Protocol 2
+    ServerAliveInterval 60
+    ServerAliveCountMax 30
+
+#
+# Multiple GitHub accounts
+#
+Host git-inksafari
+    HostName github.com
+    User inksafari
+    PreferredAuthentications publickey
+    IdentityFile ~/.ssh/id_rsa_inksafari_github
+
+#
+# VPS ( location - du-date )
+#
+#Host slc-24may2017
+#    HostName 
+#    Port 
+#    User 
+#    IdentityFile ~/.ssh/id_rsa

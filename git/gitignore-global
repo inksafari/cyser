@@ -1,0 +1,153 @@
+# Useful `.gitignore` templates:
+# https://github.com/github/gitignore
+
+# ----------------------------------------------------------------------
+# | Windows cruft                                                      |
+# ----------------------------------------------------------------------
+Desktop.ini
+ehthumbs.db
+Thumbs.db
+$RECYCLE.BIN/
+
+# ----------------------------------------------------------------------
+# | Compiled source                                                    |
+# ----------------------------------------------------------------------
+*.class
+*.com
+*.dll
+*.exe
+*.o
+*.so
+
+# ----------------------------------------------------------------------
+# | Packages                                                           |
+# ----------------------------------------------------------------------
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# ----------------------------------------------------------------------
+# | macOS cruft                                                        |
+# ----------------------------------------------------------------------
+._*
+.AppleDouble
+.DS_Store
+.localized
+.LSOverride
+.Spotlight-V100
+.Trashes
+Icon
+
+# ----------------------------------------------------------------------
+# | Linux cruft                                                        |
+# ----------------------------------------------------------------------
+*~
+
+# ----------------------------------------------------------------------
+# | Editor & IDE                                                       |
+# ----------------------------------------------------------------------
+.cache
+.cfg
+.classpath
+.metadata
+.project
+.settings
+
+# EditorConfig
+.editorconfig
+
+# JetBrains IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Emacs
+.ensime
+.ensime_cache/
+
+# VIM
+%*
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+*.un~
+.netrwhist
+Session.vim
+
+# ----------------------------------------------------------------------
+# | Tags                                                               |
+# ----------------------------------------------------------------------
+
+# CTags/ETags
+TAGS
+tags
+
+# gtags (GNU Global)
+GTAGS
+GRTAGS
+GPATH
+
+# ----------------------------------------------------------------------
+# | Miscellaneous                                                      |
+# ----------------------------------------------------------------------
+
+# Zsh
+# ------------------
+*.zwc
+
+# Vagrant
+# ------------------
+.vagrant
+
+# Logs and databases
+# ------------------
+*.log
+*.sql
+*.sqlite
+
+# Environment
+.env
+.env.development
+.env.test
+.envrc
+
+# bower
+# ------------------
+bower_components
+
+# Node.js
+# ------------------
+node_modules
+npm-debug.log
+
+# Tern.js
+# ------------------
+.tern-project
+.tern-port
+
+# Python
+# ------------------
+*.pyc
+.python-version
+.venv
+
+# Ruby
+# ------------------
+.bundle
+.ruby-version
+.sass-cache
+
+# Rails framework
+# ------------------
+coverage
+rails_best_practices_output.html
+.routes
+vendor/assets
+vendor/bundle
+vendor/cache
+vendor/bin

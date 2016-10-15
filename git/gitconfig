@@ -1,6 +1,6 @@
 [include]
     path = ~/.gitconfig.local    # for my username and email address
-	
+
 [credential]
     helper = osxkeychain         # for macOS
 
@@ -8,33 +8,36 @@
     autocorrect = 1
 
 [core]
-    # attributesfile  = ~/.gitattributes-global
+    attributesfile    = ~/.gitattributes-global
     commentchar       = ";"
     editor            = atom --wait
     excludesfile      = ~/.gitignore-global
+    hooksPath         = ~/.git-hooks
     pager             = less -JFRSX --tabs=4
     precomposeUnicode = true
     quotepath         = false
-    sharedRepository  = 0664
     whitespace        = fix,-indent-with-non-tab,trailing-space,cr-at-eol
 
 [pager]
     # diff-hightlight ( since Git v2.9 ) or so-fancy/diff-so-fancy
-    # .zshrc: export PATH=$PATH:/usr/share/doc/git/contrib/diff-highlight ( Ubuntu )
+    # .bash_profile: export PATH=/usr/share/doc/git/contrib/diff-highlight:$PATH ( Ubuntu )
     diff       =  diff-so-fancy | $(git config core.pager)
     log        =  diff-so-fancy | $(git config core.pager)
     show       =  diff-so-fancy | $(git config core.pager)
 
 [interactive]
-	diffFilter = "diff-so-fancy"
+    diffFilter = "diff-so-fancy"
 
 [gpg]
     program = gpg2
-    
+
+# http://blog.gypsydave5.com/2016/02/20/pre-commit-hooks-in-git/
+# [init]
+
 [commit]
-    gpgsign = false
+    gpgsign  = false
     template = ~/.gitmessage
-    verbose = true
+    verbose  = true
 
 [fetch]
     prune = true
@@ -49,22 +52,18 @@
     clean    = git media clean %f
     smudge   = git media smudge %f
 
-# https://github.com/motemen/ghq
-#[ghq]
-#    root = ~/src/ghq
-    
 [grep]
     extendregexp = true 
 
-#[hub]
-#    protocol = https
+[hub]
+    protocol = https
 
 [log]
     abbrevCommit = true
     decorate     = short
-    
+
 [pretty]
-    # https://git-scm.com/docs/pretty-formats          
+    # https://git-scm.com/docs/pretty-formats
     nice = "format:%C(green)%ad%Creset %C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold blue)[%an]%Creset"
     # for --relative-date
     nic2 = "format:%C(cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold)[%an]%Creset %C(green)%ad%Creset"
@@ -79,7 +78,7 @@
 
 [rebase]
     autoStash = true
-	autoSquash = true
+    autoSquash = true
 
 # ============================================================================
 # Colors / Colours
@@ -130,7 +129,7 @@
     encoding = utf-8
 
 [i18n]
-    logoutputencoding = UTF-8
+    commitencoding = UTF-8
 
 [diff]
     algorithm           = patience
@@ -139,12 +138,16 @@
     command = true
 [diff "utf-16"]
     textconv = iconv -f utf-16 -t utf-8
+[diff "org"]
+    xfuncname = "^\\*+.*"
+[diff "lisp"]
+    xfuncname = "^\\([^ ]+ [^ ]+"
 [diff "xml"]
     textconv = xmllint --format --recover
 [difftool]
     prompt = false
 
-# Merge Conflict 
+# Merge Conflict
 # --------------
 # tools: 
 #       - https://www.slant.co/topics/1324/~diff-tools-for-git
@@ -179,7 +182,6 @@
 
 [url "git@github.com:"]
     insteadOf = "gh:"
-    insteadOf = "git://github.com"
     pushInsteadOf = "github:"
     pushInsteadOf = "git://github.com/"
     pushInsteadOf = "https://github.com/"
@@ -189,6 +191,11 @@
     pushInsteadOf = "gist:"
     pushInsteadOf = "git://gist.github.com/"
     pushInsteadOf = "https://gist.github.com/"
+
+[url "git@bitbucket.org:"]
+    insteadOf = "bbt:"
+    pushInsteadOf = "git://bitbucket.org/"
+    pushInsteadOf = "https://bitbucket.org/"
 
 [alias]
     # 
@@ -203,6 +210,14 @@
     ss = show-branch --sha1-name
     st = status --short --branch
     tags = tag -n1 --list
+    rmc = rm --cached
+
+    #
+    # Submodules
+    #
+    smd = submodule add
+    smm = submodule foreach "git checkout master; git pull origin master"
+    smu = submodule update --recursive
 
     #
     # ls-files
@@ -212,7 +227,7 @@
     ls-new = ls-files --exclude-standard -o
     ls-ign = ls-files --exclude-standard -o -i
 
-    #            
+    #
     # branch
     #
     bm = branch --merged
@@ -245,7 +260,7 @@
     #   - https://gist.github.com/datagrok/4221767
     #
     who   = shortlog --summary --numbered --no-merges
-    last  = log --oneline -1 HEAD
+    las2  = log --pretty=format:"%h" --reverse -2  # usage: git last | pbcopy
     today = shortlog --since=midnight
     week  = shortlog --since=one.week.ago
     lg = log --graph --topo-order --date=relative --pretty=nic2 --all --boundary # master...dev
@@ -277,7 +292,7 @@
     #
     # commit                     # staging area ( index / cache ) -> local repo ( HEAD )
     #
-    cm = commit -m --allow-empty # single line commit message
+    cm = commit -m               # single line commit message
     ct = commit                  # with commit template
 
     #
@@ -294,9 +309,8 @@
     wip2 = reset HEAD^^ --hard
     wip3 = reaet HEAD~3 --hard
 
-    #    
+    #
     # push
     #
     publish = !"git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
     unpublish = !"git push origin :$(git rev-parse --abbrev-ref HEAD)"
-    

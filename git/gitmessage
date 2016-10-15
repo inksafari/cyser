@@ -1,14 +1,6 @@
-; Purpose (50 char max), e.g.: -----------------|    
+; Purpose (50 char max), e.g.: -----------------|
 ; Performance improvements by refactoring XYZ...
 
 ; Long description (72 char max) ---------------------------------------|
-
-
-#### Changelog ####
-
-; on branch `master`  
-;   - ADD:
-;   - MOD:
-;   - FIX:
-;   - DEL:
-
+; on branch `master`
+;   [Added] [Changed] [Deprecated] [Removed] [Fixed] [Security]

@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# Thanks
+# https://gist.github.com/TheHippo/8ad10014b39f6210bae8c8decacb2620
+# https://waiting-for-dev.github.io/blog/2014/07/19/append-issue-number-to-commit-message-automatically-with-git-hooks/
+
+NAME=$(git rev-parse --abbrev-ref HEAD)
+ISSUE_NUMBER=$(git branch | grep '*' | sed 's/* //' | tr -dc '0-9')
+
+if [ -z "$ISSUE_NUMBER" ]; then
+        echo -n -e "\n# Current branch: $NAME" | cat - "$1" > .git-commit-msg-temp
+else
+        echo -n -e "\n\nrefs #$ISSUE_NUMBER\n#Current branch: $NAME" | cat - "$1" > .git-commit-msg-temp
+fi
+cat .git-commit-msg-temp > "$1"
+rm .git-commit-msg-temp
