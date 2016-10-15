@@ -1,0 +1,43 @@
+# copied from
+#   https://github.com/pirj/dotfiles/blob/master/.irbrc
+
+#require 'irb/completion'
+#require 'irb/ext/save-history'
+
+#IRB.conf[:AUTO_INDENT] = true
+#IRB.conf[:PROMPT_MODE] = :SIMPLE
+#IRB.conf[:SAVE_HISTORY] = 20000
+#IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb-save-history"
+
+def load_gem gem
+  require gem
+rescue LoadError
+  puts "warning: #{gem} not available"
+end
+
+# gem install awesome_print benchmark-ips hirb pry pry-doc
+['hirb', 'awesome_print', 'benchmark/ips'].each do |gem|
+  load_gem gem
+end
+
+begin
+  require 'pry'
+  require 'pry-doc' rescue LoadError
+
+  if defined? ::Rails
+    include Rails::ConsoleMethods
+    require 'pry-rails'
+    ActiveRecord::Base.logger = Logger.new STDOUT
+  end
+
+  Pry.start
+  exit
+rescue LoadError => e
+  warn "➙ Unable to load pry (#{e})"
+end
+
+def go_resque
+  raise 'Resque is not defined' unless defined?(Resque)
+
+  Resque::Worker.new('*').work(10)
+end

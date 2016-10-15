@@ -1,18 +1,18 @@
 [include]
-    path = ~/.gitconfig.local    # for my username and email address
+    path = ~/.own/git/gitconfig.local  # for my username and email address
 
 [credential]
-    helper = osxkeychain         # for macOS
+    helper = osxkeychain               # for macOS
 
 [help]
     autocorrect = 1
 
 [core]
-    attributesfile    = ~/.gitattributes-global
+    attributesfile    = ~/.own/git/gitattributes-global
     commentchar       = ";"
     editor            = atom --wait
-    excludesfile      = ~/.gitignore-global
-    hooksPath         = ~/.git-hooks
+    excludesfile      = ~/.own/git/gitignore-global
+    hooksPath         = ~/.own/git/hooks
     pager             = less -JFRSX --tabs=4
     precomposeUnicode = true
     quotepath         = false
@@ -36,7 +36,7 @@
 
 [commit]
     gpgsign  = false
-    template = ~/.gitmessage
+    template = ~/.own/git/gitmessage
     verbose  = true
 
 [fetch]
@@ -211,13 +211,6 @@
     st = status --short --branch
     tags = tag -n1 --list
     rmc = rm --cached
-
-    #
-    # Submodules
-    #
-    smd = submodule add
-    smm = submodule foreach "git checkout master; git pull origin master"
-    smu = submodule update --recursive
 
     #
     # ls-files
