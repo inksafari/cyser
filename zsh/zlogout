@@ -1,0 +1,15 @@
+#!/usr/bin/env zsh
+# ----------------------------------------------------------------------
+# Executes commands before logout.
+# ----------------------------------------------------------------------
+# https://github.com/mhinz/dotfiles/blob/master/.zsh/.zlogout
+# http://www.computerhope.com/unix/sudo.htm
+
+rm -f ${ZDOTDIR:-$ZSHCONF}/.zcompdump ${ZDOTDIR:-$ZSHCONF}/.zcompdump.zwc
+rm -f ${ZDOTDIR:-$ZSHCONF}/.zshrc.zwc
+
+# Kill sudo timestamps
+which sudo &>/dev/null && sudo -k
+clear
+
+[[ -n $SSH_CONNECTION ]] && echo -n "Connection closed:  "; date

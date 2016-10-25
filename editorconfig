@@ -1,0 +1,48 @@
+# https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+root = true
+
+[*]
+charset = utf-8
+end_of_line = LF
+indent_style = space
+indent_size = 2
+insert_final_newline = false
+trim_trailing_whitespace = true
+
+[{Makefile, makefile}]
+indent_style = tab
+indent_size = 4
+
+[*.{html,xml,xhtml}]
+indent_style = tab
+tab_width = 2
+
+[*.css]
+insert_final_newline = true
+
+[*.{sass,scss}]
+insert_final_newline = true
+
+[*.{js,json}]
+insert_final_newline = true
+
+[*.toml]
+indent_style = space
+indent_size = 4
+
+[*.{asciidoc,adoc}]
+trim_trailing_whitespace = false
+
+[*.{markdown,md}]
+indent_size = 4
+trim_trailing_whitespace = false
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[*.{sh,zsh}]
+max_line_length = 78
+
+[Makefile]
+indent_style = tab

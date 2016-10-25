@@ -1,8 +1,12 @@
 Host *
-    ForwardAgent no
-    Protocol 2
-    ServerAliveInterval 60
-    ServerAliveCountMax 30
+    Compression         yes
+    ControlMaster       auto
+    ControlPath         $XDG_RUNTIME_DIR/ssh-%r@%h:%p
+    # ControlPersist    yes
+    ForwardAgent        yes
+    Protocol            2
+    ServerAliveInterval 300
+    TCPKeepAlive        yes
 
 #
 # Multiple GitHub accounts
@@ -14,7 +18,7 @@ Host git-inksafari
     IdentityFile ~/.ssh/id_rsa_inksafari_github
 
 #
-# VPS ( location - du-date )
+# VPS ( region-duedate )
 #
 #Host slc-24may2017
 #    HostName 

@@ -1,5 +1,6 @@
-# copied from
-#   https://github.com/pirj/dotfiles/blob/master/.irbrc
+# copied and modified from
+#   https://github.com/pirj/dotfiles
+#   https://github.com/docwhat/dotfiles
 
 #require 'irb/completion'
 #require 'irb/ext/save-history'
@@ -15,8 +16,10 @@ rescue LoadError
   puts "warning: #{gem} not available"
 end
 
-# gem install awesome_print benchmark-ips hirb pry pry-doc
-['hirb', 'awesome_print', 'benchmark/ips'].each do |gem|
+# gem install awesome_print benchmark-ips \
+#  table_print \
+#  pry pry-byebug pry-doc pry-theme
+['awesome_print', 'pry-byebug', 'table_print', 'benchmark/ips'].each do |gem|
   load_gem gem
 end
 
@@ -30,6 +33,7 @@ begin
     ActiveRecord::Base.logger = Logger.new STDOUT
   end
 
+  AwesomePrint.pry!
   Pry.start
   exit
 rescue LoadError => e

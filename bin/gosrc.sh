@@ -10,8 +10,8 @@
 GO_URL="https://storage.googleapis.com/golang"
 GO_VERSION=${1:-"1.7.1"}                         # https://golang.org/dl/
 GO_FILE="go$GO_VERSION.linux-amd64.tar.gz"
-GO_ROOT=$HOME/.local/lib/golang                  # source code of Golang
-GO_PATH=$HOME/.local/go                          # Go packages
+GO_ROOT=$HOME/.local/share/golang                # source code of Golang
+GO_PATH=$HOME/.local/lib/go                      # Go packages
 
 #DISTRO=`lsb_release -ds | awk -F ' ' '{printf $1}' | tr A-Z a-z`
 #DISTRO_VERSION=`lsb_release -cs`

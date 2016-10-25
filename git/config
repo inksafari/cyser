@@ -1,5 +1,5 @@
 [include]
-    path = ~/.own/git/gitconfig.local  # for my username and email address
+    path = ~/.own/gitconfig.local      # for my username and email address
 
 [credential]
     helper = osxkeychain               # for macOS
@@ -8,12 +8,12 @@
     autocorrect = 1
 
 [core]
-    attributesfile    = ~/.own/git/gitattributes-global
+    attributesfile    = $XDG_CONFIG_HOME/git/attributes
     commentchar       = ";"
-    editor            = atom --wait
-    excludesfile      = ~/.own/git/gitignore-global
-    hooksPath         = ~/.own/git/hooks
-    pager             = less -JFRSX --tabs=4
+    editor            = code --wait
+    excludesfile      = $XDG_CONFIG_HOME/git/ignore
+    hooksPath         = $XDG_CONFIG_HOME/git/hooks
+    pager             = less -JFRSX --tabs=4    # or `less -RFXx1,5`
     precomposeUnicode = true
     quotepath         = false
     whitespace        = fix,-indent-with-non-tab,trailing-space,cr-at-eol
@@ -21,22 +21,23 @@
 [pager]
     # diff-hightlight ( since Git v2.9 ) or so-fancy/diff-so-fancy
     # .bash_profile: export PATH=/usr/share/doc/git/contrib/diff-highlight:$PATH ( Ubuntu )
-    diff       =  diff-so-fancy | $(git config core.pager)
-    log        =  diff-so-fancy | $(git config core.pager)
-    show       =  diff-so-fancy | $(git config core.pager)
+    diff       = diff-so-fancy | $(git config core.pager)
+    log        = diff-so-fancy | $(git config core.pager)
+    show       = diff-so-fancy | $(git config core.pager)
 
 [interactive]
-    diffFilter = "diff-so-fancy"
+    diffFilter = diff-so-fancy
 
 [gpg]
     program = gpg2
 
 # http://blog.gypsydave5.com/2016/02/20/pre-commit-hooks-in-git/
 # [init]
+# templatedir = $XDG_CONFIG_HOME/git/template
 
 [commit]
     gpgsign  = false
-    template = ~/.own/git/gitmessage
+    template = $XDG_CONFIG_HOME/git/message
     verbose  = true
 
 [fetch]
@@ -53,7 +54,7 @@
     smudge   = git media smudge %f
 
 [grep]
-    extendregexp = true 
+    extendregexp = true
 
 [hub]
     protocol = https
@@ -66,7 +67,7 @@
     # https://git-scm.com/docs/pretty-formats
     nice = "format:%C(green)%ad%Creset %C(bold cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold blue)[%an]%Creset"
     # for --relative-date
-    nic2 = "format:%C(cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(bold)[%an]%Creset %C(green)%ad%Creset"
+    nic2 = "format:%C(cyan)%h%Creset -%C(bold yellow)%d%Creset %s %C(dim)[%an]%Creset %C(green)%ad%Creset"
     # for `git reflog`
     relg = "%C(cyan)%h%Creset %gd %gs %Cgreen(%cr)%Creset"
 
@@ -79,6 +80,12 @@
 [rebase]
     autoStash = true
     autoSquash = true
+
+[tag]
+    sort = version:refname
+
+#[tar "tar.xz"]
+#    command = xz -c
 
 # ============================================================================
 # Colors / Colours
@@ -129,8 +136,13 @@
     encoding = utf-8
 
 [i18n]
-    commitencoding = UTF-8
+    commitencoding    = utf-8
+    logoutputencoding = utf-8
 
+# https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header
+# https://github.com/git/git/blob/master/userdiff.c
+# https://www.emacswiki.org/emacs/GitForEmacsDevs
+# https://www.reddit.com/r/emacs/comments/4gudyw/
 [diff]
     algorithm           = patience
     compactionHeuristic = true
@@ -138,10 +150,17 @@
     command = true
 [diff "utf-16"]
     textconv = iconv -f utf-16 -t utf-8
-[diff "org"]
-    xfuncname = "^\\*+.*"
 [diff "lisp"]
-    xfuncname = "^\\([^ ]+ [^ ]+"
+    # xfuncname = "^\\([^ ]+ [^ ]+"
+    # xfuncname = "^(\\(.*)$"
+    xfuncname = "^(\\((def|.*let|with-).*)$"
+[diff "org"]
+    xfuncname = "^\\*+ +.*$"
+[diff "tex"]
+    xfuncname = "^(\\\\(sub)*section\\{.*)$"
+    wordRegex = "\\\\[a-zA-Z]+|[{}]|\\\\.|[^\\{}[:space:]]+"
+[diff "texinfo"]
+    xfuncname = "^@node[ \t][ \t]*\\([^,][^,]*\\)"
 [diff "xml"]
     textconv = xmllint --format --recover
 [difftool]
@@ -201,6 +220,7 @@
     # 
     # misc ( aliases, status, tags, ... )    
     #
+    # https://github.com/yulii/dotfiles/blob/master/.gitconfig
     as = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
     get = !git pull --rebase && git submodule update --init --recursive
     get-ign = "!f() { curl -L -s https://www.gitignore.io/api/$@; }; f"
@@ -209,8 +229,11 @@
     sc = clone --depth=1
     ss = show-branch --sha1-name
     st = status --short --branch
-    tags = tag -n1 --list
     rmc = rm --cached
+    # https://github.com/anishathalye/dotfiles/blob/master/gitconfig
+    tar = ! "tar() { git archive --format tar --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; tar"
+    targz = ! "targz() { git archive --format tar.gz --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; targz"
+    zip = ! "zip() { git archive --format zip --prefix=\"${PWD##*/}/\" HEAD -o ${1}; }; zip"
 
     #
     # ls-files
@@ -237,10 +260,14 @@
     #
     # stash ( saved working directory and index )
     #
-    sth = stash
+    sth = stash --keep-index
+    stu = stash --include-untracked
     stl = stash list
     sts = stash show
     stp = stash pop
+    ## https://github.com/hypnoglow/dotfiles/blob/master/git/gitconfig
+    snapshot = !git stash save "snapshot: $(date)" && git stash apply "stash@{0}"
+    snapshots = !git stash list --grep snapshot
 
     #
     # checkout

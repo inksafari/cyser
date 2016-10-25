@@ -1,1 +1,2 @@
 - color.png: https://github.com/39e/dotfiles
+- Xterm_256color_chart.svg: https://en.wikipedia.org/wiki/File:Xterm_256color_chart.svg

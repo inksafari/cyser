@@ -1,0 +1,132 @@
+#!/usr/bin/env zsh
+# ----------------------------------------------------------------------
+# Defines environment variables.
+# ----------------------------------------------------------------------
+
+# We'll do this later in zshrc by ourselves
+skip_global_compinit=1
+
+#
+# Locale ( LC_ALL -> LC_* -> LANG )
+#
+export LANG=en_US.UTF-8
+export LANGUAGE=$LANG
+export LC_CTYPE=$LANG
+#LC_MONETARY
+#LC_NUMERIC
+#LC_TIME
+
+#
+# Editors
+#
+# export VIMINIT='let $MYVIMRC="${XDG_CONFIG_HOME:-$HOME/.config}/vim/vimrc" | source $MYVIMRC'
+export EDITOR='nano'
+export VISUAL=$EDITOR
+
+#
+# Less
+#
+#export LESSHISTFILE=${XDG_DATA_HOME:-$HOME/.config}/lesshst
+export LESS='--ignore-case --RAW-CONTROL-CHARS --LONG-PROMPT --no-init --quit-if-one-screen --hilite-unread --tabs=4'
+#export PAGER=LESS
+
+#
+# XDG Base Directory Specification
+#
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+if [ ! -d /tmp/$LOGNAME ]; then
+    mkdir -p -m 700 /tmp/$LOGNAME
+fi
+export XDG_RUNTIME_DIR=/tmp/$LOGNAME            # or $HOME/.tmp
+
+#
+# Home
+#
+## $XDG_CONFIG_HOME
+export           ATOM_HOME =$XDG_CONFIG_HOME/atom
+#export           GNUPGHOME =$XDG_CONFIG_HOME/gnupg
+#export               HTOPRC=$XDG_CONFIG_HOME/htop/htoprc
+#export            MPV_HOME =$XDG_CONFIG_HOME/mpv
+#export        PACKER_CONFIG=$XDG_CONFIG_HOME/packer
+## $XDG_DATA_HOME
+#export MACHINE_STORAGE_PATH=$XDG_DATA_HOME/docker/machine
+#export         VAGRANT_HOME=$XDG_DATA_HOME/vagrant    # default: ~/.vagrant.d
+## $XDG_CACHE_HOME
+#export     PACKER_CACHE_DIR=$XDG_CACHE_HOME/packer
+
+#
+# Zsh
+#
+export ZSHCONF=${ZDOTDIR:-$XDG_CONFIG_HOME}/zsh # my zsh config files
+export ZSH_CACHE_DIR=$XDG_CACHE_HOME/zsh
+
+#
+# zplug ( plugin manager for Zsh )
+#
+export ZPLUG_HOME=$XDG_CONFIG_HOME/zplug        # ~/.config/zplug
+export ZPLUG_CACHE_DIR=$XDG_CACHE_HOME/zplug    # ~/.cache/zplug
+export ZPLUG_REPOS=$ZPLUG_HOME/repos            # ~/.config/zplug/repos
+export ZPLUG_CLONE_DEPTH=1
+export ZPLUG_THREADS=32
+
+#
+# Command-line Fuzzy Finder
+#
+## search ( ack, ag, pt or ripgrep )
+
+## menu ( percol, peco or fzf )
+export FILTER='fzf-tmux:fzf:peco-tmux:peco'
+export INTERACTIVE_FILTER='fzf'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_OPTS='--reverse --inline-info'
+#export FZF_DEFAULT_OPTS='--extended --ansi --multi'
+
+#
+# Defining word endings
+#
+# https://github.com/tomsquest/dotfiles/blob/master/zsh/config.zsh
+# Allows to kill backward word path by path using ctrl+w
+# With this, ctrl+w on '/usr/bin' will produce '/usr'. Without it, '/usr/bin' is removed.
+# Default is: *?_-.[]~=/&;!#$%^(){}<>
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+#
+# Tmux
+#
+export TMUX_TMPDIR=$XDG_RUNTIME_DIR
+
+# Keep SSH_AUTH_SOCK valid across several attachments to the remote tmux session
+# https://github.com/z0rc/dotfiles/blob/master/zsh/zshenv
+if [[ `whoami` != root ]]; then
+    if [[ -S "$SSH_AUTH_SOCK" ]] && [[ ! -h "$SSH_AUTH_SOCK" ]] && [[ "$SSH_AUTH_SOCK" != "$HOME/.ssh/ssh_auth_sock" ]]; then
+        ln -sf '$SSH_AUTH_SOCK' '$HOME/.ssh/ssh_auth_sock'
+    fi
+    export SSH_AUTH_SOCK='$HOME/.ssh/ssh_auth_sock'
+fi
+
+#
+# Platform Specific
+#
+case ${OSTYPE} in
+  darwin*)
+    source $ZSHCONF/path.macos.zsh
+  ;;
+  linux*)
+    source $ZSHCONF/path.linux.zsh
+  ;;
+esac
+
+#
+# Loading local config files
+#
+## Include local zshenv
+if [[ -f "${ZDOTDIR:-$HOME}/zshenv.local" ]]; then
+    source '$HOME/zshenv.local'
+fi
+
+## Include standard zshrc
+#if [[ -o interactive ]]; then
+#    source '${ZDOTDIR:-$ZSHCONF}/zshrc'
+#fi

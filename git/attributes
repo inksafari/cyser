@@ -1,0 +1,7 @@
+# https://gist.github.com/ruediger/5647207
+# https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header
+
+*.el        diff=lisp
+*.org       diff=org
+*.texi*     diff=texinfo
+Rakefile    diff=ruby

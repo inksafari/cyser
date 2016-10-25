@@ -51,27 +51,26 @@ Icon
 # ----------------------------------------------------------------------
 # | Editor & IDE                                                       |
 # ----------------------------------------------------------------------
-.cache
 .cfg
 .classpath
 .metadata
 .project
 .settings
 
-# EditorConfig
-.editorconfig
-
 # JetBrains IDE
+# ------------------
 .idea/
 *.iml
 *.ipr
 *.iws
 
 # Emacs
+# ------------------
 .ensime
 .ensime_cache/
 
 # VIM
+# ------------------
 %*
 [._]*.s[a-w][a-z]
 [._]s[a-w][a-z]
@@ -83,14 +82,25 @@ Session.vim
 # | Tags                                                               |
 # ----------------------------------------------------------------------
 
-# CTags/ETags
+# CTags / ETags
+# ------------------
 TAGS
 tags
 
 # gtags (GNU Global)
+# ------------------
 GTAGS
 GRTAGS
 GPATH
+
+# ----------------------------------------------------------------------
+# | Unit test / coverage reports                                       |
+# ----------------------------------------------------------------------
+.cache
+*,cover
+.coverage
+.coverage.*
+coverage.xml
 
 # ----------------------------------------------------------------------
 # | Miscellaneous                                                      |
@@ -109,6 +119,12 @@ GPATH
 *.log
 *.sql
 *.sqlite
+
+# temp files
+# ------------------
+temp
+tmp
+spec/tmp
 
 # Environment
 .env
@@ -134,17 +150,20 @@ npm-debug.log
 # ------------------
 *.pyc
 .python-version
-.venv
+venv
+__pycache__/
+*.py[cod]
 
 # Ruby
 # ------------------
 .bundle
 .ruby-version
 .sass-cache
+.byebug_history
+.greenbar
 
 # Rails framework
 # ------------------
-coverage
 rails_best_practices_output.html
 .routes
 vendor/assets

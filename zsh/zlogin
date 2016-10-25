@@ -1,0 +1,18 @@
+#!/usr/bin/env zsh
+# ----------------------------------------------------------------------
+# Startup file read in interactive login shells.
+# ----------------------------------------------------------------------
+## https://github.com/hypnoglow/dotfiles/blob/master/zsh/zlogin
+
+# Compile the completion dump to increase startup speed. ( sorin-ionescu/prezto )
+{
+  zcompdump="${ZDOTDIR:-$ZSHCONF}/.zcompdump"
+  if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
+    zcompile "$zcompdump"
+  fi
+} &!
+
+# Compile .zshrc if necessary. ( https://github.com/NigoroJr/dotfiles )
+if [ ! -f ${ZDOTDIR:-$ZSHCONF}/zshrc.zwc -o ${ZDOTDIR:-$ZSHCONF}/.zshrc -nt ${ZDOTDIR:-$ZSHCONF}/.zshrc.zwc ]; then
+    zcompile ~/.zshrc
+fi
