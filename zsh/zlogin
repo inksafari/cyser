@@ -4,15 +4,19 @@
 # ----------------------------------------------------------------------
 ## https://github.com/hypnoglow/dotfiles/blob/master/zsh/zlogin
 
-# Compile the completion dump to increase startup speed. ( sorin-ionescu/prezto )
+unfunction compinit
+autoload -Uz compinit
+compinit -i -d "${zcompdump}"  # ZSH_COMPDUMP
+
+# Asynchronously compile the completion dump to increase startup speed. ( sorin-ionescu/prezto )
 {
-  zcompdump="${ZDOTDIR:-$ZSHCONF}/.zcompdump"
+  zcompdump="${ZDOTDIR:-$ZSHCONF}/zcompdump"
   if [[ -s "$zcompdump" && (! -s "${zcompdump}.zwc" || "$zcompdump" -nt "${zcompdump}.zwc") ]]; then
     zcompile "$zcompdump"
   fi
 } &!
 
 # Compile .zshrc if necessary. ( https://github.com/NigoroJr/dotfiles )
-if [ ! -f ${ZDOTDIR:-$ZSHCONF}/zshrc.zwc -o ${ZDOTDIR:-$ZSHCONF}/.zshrc -nt ${ZDOTDIR:-$ZSHCONF}/.zshrc.zwc ]; then
-    zcompile ~/.zshrc
+if [ ! -f ${ZDOTDIR:-$ZSHCONF}/zshrc.zwc -o ${ZDOTDIR:-$ZSHCONF}/zshrc -nt ${ZDOTDIR:-$ZSHCONF}/zshrc.zwc ]; then
+    zcompile ${ZDOTDIR:-$ZSHCONF}/zshrc
 fi

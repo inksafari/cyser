@@ -1,0 +1,28 @@
+# {高德，百度，騰訊} 高精度 IP 定位 API
+# https://www.v2ex.com/t/325447
+
+0.0.0.0 apilocate.amap.com
+0.0.0.0 restapi.amap.com
+0.0.0.0 api.map.baidu.com
+0.0.0.0 newvector.map.baidu.com
+0.0.0.0 offnavi.map.baidu.com
+0.0.0.0 ps.map.baidu.com
+0.0.0.0 sv.map.baidu.com
+0.0.0.0 ulog.imap.baidu.com
+0.0.0.0 newloc.map.n.shifen.com
+0.0.0.0 apis.map.qq.com
+0.0.0.0 lbs.map.qq.com
+0.0.0.0 lbssp.map.qq.com
+
+:: apilocate.amap.com
+:: restapi.amap.com
+:: api.map.baidu.com
+:: newvector.map.baidu.com
+:: offnavi.map.baidu.com
+:: ps.map.baidu.com
+:: sv.map.baidu.com
+:: ulog.imap.baidu.com
+:: newloc.map.n.shifen.com
+:: apis.map.qq.com
+:: lbs.map.qq.com
+:: lbssp.map.qq.com

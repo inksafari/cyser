@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+#
 # Copy with a progress bar
 #
 # - https://github.com/nfm/dotfiles/blob/master/.zsh/functions.zsh

@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+#
 # Twenty most frequently used commands
 # 
 # - https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/functions.zsh

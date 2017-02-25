@@ -1,0 +1,2 @@
+- url: https://github.com/tmux-plugins/tpm
+  path: ~/.config/tmux/plugins

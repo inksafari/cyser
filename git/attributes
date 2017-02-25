@@ -1,7 +1,25 @@
 # https://gist.github.com/ruediger/5647207
+# https://github.com/docwhat/dotfiles/blob/master/config/git/attributes
 # https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header
+
+*.gif       binary
+*.jpg       binary
+*.png       binary
+*.pdf       binary
 
 *.el        diff=lisp
 *.org       diff=org
 *.texi*     diff=texinfo
+*.tikz      diff=tex
+*.tex       diff=tex
+*.latex     diff=tex
 Rakefile    diff=ruby
+
+*.bash      text eol=lf
+*.sh        text eol=lf
+*.zsh       text eol=lf
+*.zshrc     text eol=lf
+*.zshenv    text eol=lf
+*.zprofile  text eol=lf
+*.zlogin    text eol=lf
+*.zlogout   text eol=lf

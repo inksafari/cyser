@@ -1,5 +1,6 @@
 # Useful `.gitignore` templates:
 # https://github.com/github/gitignore
+# https://github.com/molovo/.files/blob/master/files/.gitignore_global
 
 # ----------------------------------------------------------------------
 # | Windows cruft                                                      |
@@ -66,6 +67,7 @@ Icon
 
 # Emacs
 # ------------------
+*.elc
 .ensime
 .ensime_cache/
 
@@ -101,6 +103,7 @@ GPATH
 .coverage
 .coverage.*
 coverage.xml
+.tox
 
 # ----------------------------------------------------------------------
 # | Miscellaneous                                                      |
@@ -148,11 +151,12 @@ npm-debug.log
 
 # Python
 # ------------------
+*.egg-info
 *.pyc
 .python-version
-venv
 __pycache__/
 *.py[cod]
+venv*
 
 # Ruby
 # ------------------

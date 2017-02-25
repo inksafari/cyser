@@ -1,3 +1,5 @@
+#!/usr/bin/env zsh
+#
 # Create a new repository in GitHub
 #
 # - https://github.com/kenju/git_shellscript/blob/master/github.sh

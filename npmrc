@@ -1,7 +1,6 @@
 # https://docs.npmjs.com/files/npmrc
 # https://docs.npmjs.com/misc/config
 
-prefix=$HOME/.local/lib/node
 loglevel=error
 
 init-author-name=Tzu-Yu Lin

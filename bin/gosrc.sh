@@ -2,6 +2,7 @@
 
 # Install Golang on Ubuntu Linux
 # ----------------------------------------------------------------------
+# or https://gist.github.com/jacoelho/fb989f8c25c3ca7d5db5
 # copied and modified from https://gist.github.com/jniltinho/8758e15a9ef80a189fce
 #
 # usage:

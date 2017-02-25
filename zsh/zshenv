@@ -1,10 +1,13 @@
 #!/usr/bin/env zsh
-# ----------------------------------------------------------------------
-# Defines environment variables.
-# ----------------------------------------------------------------------
 
-# We'll do this later in zshrc by ourselves
-skip_global_compinit=1
+ulimit -c unlimited
+
+# ----------------------------------------------------------------------------
+# Defines environment variables.
+# ----------------------------------------------------------------------------
+
+skip_global_compinit=1  # We'll do this later in zshrc by ourselves
+setopt no_global_rcs    # Don't load system-wide zsh config files
 
 #
 # Locale ( LC_ALL -> LC_* -> LANG )
@@ -12,6 +15,8 @@ skip_global_compinit=1
 export LANG=en_US.UTF-8
 export LANGUAGE=$LANG
 export LC_CTYPE=$LANG
+export LC_COLLATE=$LANG
+export LC_MESSAGES=$LANG
 #LC_MONETARY
 #LC_NUMERIC
 #LC_TIME
@@ -24,48 +29,66 @@ export EDITOR='nano'
 export VISUAL=$EDITOR
 
 #
-# Less
-#
-#export LESSHISTFILE=${XDG_DATA_HOME:-$HOME/.config}/lesshst
-export LESS='--ignore-case --RAW-CONTROL-CHARS --LONG-PROMPT --no-init --quit-if-one-screen --hilite-unread --tabs=4'
-#export PAGER=LESS
-
-#
 # XDG Base Directory Specification
 #
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-~/.config}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-~/.local/share}
+case ${OSTYPE} in
+  darwin*)
+    export XDG_CACHE_HOME=${XDG_CACHE_HOME:-~/Library/Caches}
+  ;;
+  linux*)
+    export XDG_CACHE_HOME=${XDG_CACHE_HOME:-~/.cache}
+  ;;
+esac
+
 if [ ! -d /tmp/$LOGNAME ]; then
     mkdir -p -m 700 /tmp/$LOGNAME
 fi
-export XDG_RUNTIME_DIR=/tmp/$LOGNAME            # or $HOME/.tmp
+export XDG_RUNTIME_DIR=/tmp/$LOGNAME                   # or $HOME/.tmp
 
 #
 # Home
 #
+export JOBS=max
 ## $XDG_CONFIG_HOME
-export           ATOM_HOME =$XDG_CONFIG_HOME/atom
-#export           GNUPGHOME =$XDG_CONFIG_HOME/gnupg
+export            ATOM_HOME=$XDG_CONFIG_HOME/atom
+#export            CURL_HOME=$XDG_CONFIG_HOME/curl
 #export               HTOPRC=$XDG_CONFIG_HOME/htop/htoprc
-#export            MPV_HOME =$XDG_CONFIG_HOME/mpv
+#export    HTTPIE_CONFIG_DIR=$XDG_CONFIG_HOME/httpie
+export   JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
+export         MPLCONFIGDIR=$XDG_CONFIG_HOME/mpl       # matplotlib
+#export             MPV_HOME=$XDG_CONFIG_HOME/mpv
 #export        PACKER_CONFIG=$XDG_CONFIG_HOME/packer
+#export               WGETRC=$XDG_CONFIG_HOME/wget/wgetrc
 ## $XDG_DATA_HOME
+#export          ASPELL_CONF=$XDG_DATA_HOME/aspell
 #export MACHINE_STORAGE_PATH=$XDG_DATA_HOME/docker/machine
 #export         VAGRANT_HOME=$XDG_DATA_HOME/vagrant    # default: ~/.vagrant.d
 ## $XDG_CACHE_HOME
 #export     PACKER_CACHE_DIR=$XDG_CACHE_HOME/packer
+export              GIT_DIR=$XDG_CONFIG_HOME/git
+export         SSH_KEY_PATH=$HOME/.ssh
+## #HOME/.own
+#export            GNUPGHOME=$HOME/.gnupg
+
+#
+# Less
+#
+#export LESSHISTFILE=$XDG_DATA_HOME/lesshst
+export LESS='--ignore-case --RAW-CONTROL-CHARS --LONG-PROMPT --no-init --quit-if-one-screen --hilite-unread --tabs=4'
+#export PAGER=LESS
 
 #
 # Zsh
 #
 export ZSHCONF=${ZDOTDIR:-$XDG_CONFIG_HOME}/zsh # my zsh config files
-export ZSH_CACHE_DIR=$XDG_CACHE_HOME/zsh
+export ZSH_CACHE_DIR=$XDG_CACHE_HOME/zsh        # ~/.cache/zsh
 
 #
 # zplug ( plugin manager for Zsh )
 #
-export ZPLUG_HOME=$XDG_CONFIG_HOME/zplug        # ~/.config/zplug
+export ZPLUG_HOME=$ZSHCONF/repos/zplug/zplug    # ~/.config/zsh/repos/zplug/zplug
 export ZPLUG_CACHE_DIR=$XDG_CACHE_HOME/zplug    # ~/.cache/zplug
 export ZPLUG_REPOS=$ZPLUG_HOME/repos            # ~/.config/zplug/repos
 export ZPLUG_CLONE_DEPTH=1
@@ -75,6 +98,8 @@ export ZPLUG_THREADS=32
 # Command-line Fuzzy Finder
 #
 ## search ( ack, ag, pt or ripgrep )
+export ACKRC=$XDG_CONFIG_HOME/ack/ackrc
+export ACK_PAGER_COLOR='less -x4SRFX'
 
 ## menu ( percol, peco or fzf )
 export FILTER='fzf-tmux:fzf:peco-tmux:peco'
@@ -83,6 +108,10 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 export FZF_DEFAULT_OPTS='--reverse --inline-info'
 #export FZF_DEFAULT_OPTS='--extended --ansi --multi'
 
+# enhancd config
+export ENHANCD_COMMAND=ed
+export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
+
 #
 # Defining word endings
 #
@@ -90,6 +119,7 @@ export FZF_DEFAULT_OPTS='--reverse --inline-info'
 # Allows to kill backward word path by path using ctrl+w
 # With this, ctrl+w on '/usr/bin' will produce '/usr'. Without it, '/usr/bin' is removed.
 # Default is: *?_-.[]~=/&;!#$%^(){}<>
+# autoload -U select-word-style && select-word-style normal
 export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
 #
@@ -97,13 +127,10 @@ export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 #
 export TMUX_TMPDIR=$XDG_RUNTIME_DIR
 
-# Keep SSH_AUTH_SOCK valid across several attachments to the remote tmux session
-# https://github.com/z0rc/dotfiles/blob/master/zsh/zshenv
-if [[ `whoami` != root ]]; then
-    if [[ -S "$SSH_AUTH_SOCK" ]] && [[ ! -h "$SSH_AUTH_SOCK" ]] && [[ "$SSH_AUTH_SOCK" != "$HOME/.ssh/ssh_auth_sock" ]]; then
-        ln -sf '$SSH_AUTH_SOCK' '$HOME/.ssh/ssh_auth_sock'
-    fi
-    export SSH_AUTH_SOCK='$HOME/.ssh/ssh_auth_sock'
+# AWS CLI
+if (( $+commands[aws] )); then
+    export AWS_CONFIG_FILE='$XDG_CONFIG_HOME/aws/config'
+    export AWS_CREDENTIAL_FILE='$HOME/.own/aws-credentials'  # or $XDG_CONFIG_HOME/aws/credentials
 fi
 
 #
@@ -123,7 +150,7 @@ esac
 #
 ## Include local zshenv
 if [[ -f "${ZDOTDIR:-$HOME}/zshenv.local" ]]; then
-    source '$HOME/zshenv.local'
+    source '${ZDOTDIR:-$HOME}/zshenv.local'
 fi
 
 ## Include standard zshrc

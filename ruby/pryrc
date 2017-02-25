@@ -1,6 +1,14 @@
 # vim: ft=ruby
 # copied and modified from
 #   https://github.com/martin-svk/dot-files/ruby/pryrc
+#   https://github.com/docwhat/dotfiles/blob/master/pryrc
+#   https://github.com/docwhat/dotfiles/blob/master/aprc
+if ENV.include?('XDG_DATA_HOME')
+  Pry.config.history.file = "#{ENV['XDG_DATA_HOME']}/ruby/pry-history"
+else
+  Pry.config.history.file = "~/.local/share/ruby/pry-history"
+end
+
 require 'awesome_print'
 AwesomePrint.pry!
 

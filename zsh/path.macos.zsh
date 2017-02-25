@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# https://github.com/kui/dotfiles/blob/master/dotfiles/zshrc
 
 #
 # Homebrew
@@ -20,5 +21,5 @@ export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
 #
 # MacTeX / BasicTeX
 #
-#export TEXBIN=
+#export TEXBIN="/Library/TeX/texbin"
 #export PATH=$TEXBIN:$PATH

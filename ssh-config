@@ -1,8 +1,9 @@
+# TODO: https://speakerdeck.com/k1low/configdeguan-li-suru
 Host *
     Compression         yes
     ControlMaster       auto
-    ControlPath         $XDG_RUNTIME_DIR/ssh-%r@%h:%p
-    # ControlPersist    yes
+    ControlPath         ~/.ssh/sockets/%r@%h:%p
+    ControlPersist      600
     ForwardAgent        yes
     Protocol            2
     ServerAliveInterval 300
