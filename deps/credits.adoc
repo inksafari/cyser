@@ -1,0 +1,11 @@
+Brewfile / Caskfile::
+- https://github.com/borestad/dotjitsu/blob/master/Brewfile
+- https://github.com/derimagia/dotfiles/blob/master/.config/brew/brewfile
+- https://github.com/nihonzaru/Brewfile/blob/master/Brewfile
+- https://github.com/joeyhoer/starter/blob/master/installers/homebrew/Brewfile
+- https://github.com/xieyunzi/dotfiles/blob/master/Brewfile
+tools:::
+- https://github.com/msanders/cider
+    - https://github.com/chrislopresto/dotfiles/tree/master/cider
+requirements.txt::
+- ...

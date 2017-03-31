@@ -1,3 +1,8 @@
+# tool: https://github.com/0xl3vi/hostsctl
+
+# localhost
+127.0.0.1 localhost
+
 # {高德，百度，騰訊} 高精度 IP 定位 API
 # https://www.v2ex.com/t/325447
 
@@ -26,3 +31,7 @@
 :: apis.map.qq.com
 :: lbs.map.qq.com
 :: lbssp.map.qq.com
+
+# Ads
+# https://github.com/zcbenz/dotfiles/blob/master/etc/hosts
+# https://github.com/kcschan/AdditionalAdblock

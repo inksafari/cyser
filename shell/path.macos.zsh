@@ -1,15 +1,10 @@
 #!/usr/bin/env zsh
 # https://github.com/kui/dotfiles/blob/master/dotfiles/zshrc
 
-#
-# Homebrew
-#
-export ARCHFLAGS="-arch x86_64"
+#       ╭> CLI
+# Homebrew ( Cask )
+#              ╰> GUI
 export HOMEBREW_NO_ANALYTICS=1
-
-#
-# Cask
-#
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 #
@@ -23,3 +18,16 @@ export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
 #
 #export TEXBIN="/Library/TeX/texbin"
 #export PATH=$TEXBIN:$PATH
+
+#
+# Paths
+#
+typeset -gU cdpath fpath mailpath path
+
+path=(
+  ~/bin
+  /usr/local/share/npm/bin
+  /usr/local/heroku/bin
+  /usr/local/{bin,sbin}
+  $path
+)

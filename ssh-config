@@ -1,13 +1,14 @@
-# TODO: https://speakerdeck.com/k1low/configdeguan-li-suru
+# https://github.com/Rowno/dotfiles/blob/master/public/.ssh/config
 Host *
-    Compression         yes
-    ControlMaster       auto
-    ControlPath         ~/.ssh/sockets/%r@%h:%p
-    ControlPersist      600
-    ForwardAgent        yes
-    Protocol            2
-    ServerAliveInterval 300
-    TCPKeepAlive        yes
+    Compression          yes
+    ControlMaster        auto
+    ControlPath          ~/.ssh/sockets/%r@%h:%p
+    ControlPersist       600
+    ForwardAgent         yes
+    GSSAPIAuthentication no
+    Protocol             2
+    ServerAliveInterval  300
+    TCPKeepAlive         yes
 
 #
 # Multiple GitHub accounts
@@ -26,3 +27,6 @@ Host git-inksafari
 #    Port 
 #    User 
 #    IdentityFile ~/.ssh/id_rsa
+#    LocalForward 3000 localhost:3000
+#    LocalForward 8080 localhost:8080
+#    LocalForward 9999 192.168.1.1:80

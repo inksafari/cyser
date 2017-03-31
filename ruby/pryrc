@@ -3,6 +3,7 @@
 #   https://github.com/martin-svk/dot-files/ruby/pryrc
 #   https://github.com/docwhat/dotfiles/blob/master/pryrc
 #   https://github.com/docwhat/dotfiles/blob/master/aprc
+#   https://github.com/troyp/dotfiles/blob/master/.pryrc
 if ENV.include?('XDG_DATA_HOME')
   Pry.config.history.file = "#{ENV['XDG_DATA_HOME']}/ruby/pry-history"
 else

@@ -1,20 +1,12 @@
-# https://gist.github.com/ruediger/5647207
-# https://github.com/docwhat/dotfiles/blob/master/config/git/attributes
-# https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header
+# https://github.com/ismay/dotfiles/blob/master/gitattributes
+# Automatically normalize line endings for all text-based files
+# http://git-scm.com/docs/gitattributes#_end_of_line_conversion
+* text=auto
 
-*.gif       binary
-*.jpg       binary
-*.png       binary
-*.pdf       binary
-
-*.el        diff=lisp
-*.org       diff=org
-*.texi*     diff=texinfo
-*.tikz      diff=tex
-*.tex       diff=tex
-*.latex     diff=tex
-Rakefile    diff=ruby
-
+# For the following file types, normalize line endings to LF on
+# checkin and prevent conversion to CRLF when they are checked out
+# (this is required in order to prevent newline related issues like,
+# for example, after the build script is run)
 *.bash      text eol=lf
 *.sh        text eol=lf
 *.zsh       text eol=lf
@@ -23,3 +15,29 @@ Rakefile    diff=ruby
 *.zprofile  text eol=lf
 *.zlogin    text eol=lf
 *.zlogout   text eol=lf
+*.css       text eol=lf
+*.html      text eol=lf
+*.js        text eol=lf
+*.json      text eol=lf
+*.adoc      text eol=lf
+*.md        text eol=lf
+*.txt       text eol=lf
+*.xml       text eol=lf
+
+# https://gist.github.com/ruediger/5647207
+# https://github.com/docwhat/dotfiles/blob/master/config/git/attributes
+# https://git-scm.com/docs/gitattributes#_defining_a_custom_hunk_header
+*.gif       binary
+*.jpg       binary
+*.png       binary
+*.pdf       binary
+
+*.docx      diff=pandoc2md
+*.odt       diff=pandoc2md
+*.el        diff=lisp
+*.org       diff=org
+*.texi*     diff=texinfo
+*.tikz      diff=tex
+*.tex       diff=tex
+*.latex     diff=tex
+Rakefile    diff=ruby

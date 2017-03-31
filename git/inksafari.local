@@ -1,4 +1,5 @@
 [user]
+    useconfigonly = true
     name  = Tzu-Yu Lin
     email = inksafari@users.noreply.github.com
     # signingkey GPG-KEY-ID

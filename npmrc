@@ -1,6 +1,6 @@
 # https://docs.npmjs.com/files/npmrc
 # https://docs.npmjs.com/misc/config
-
+# https://github.com/djfurman/dotfiles/blob/develop/.npmrc
 loglevel=error
 
 init-author-name=Tzu-Yu Lin

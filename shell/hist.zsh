@@ -12,8 +12,9 @@ if [ -z "$HISTFILE" ]; then
     HISTFILE=$XDG_DATA_HOME/zsh/zhistory
 fi
 
-HISTSIZE=10000                  # History size in memory ( max: 10000000 )
-SAVEHIST=$(($SAVEHIST + 2000))  # The number of histsize ( max: 10000000 )
+HISTORY_IGNORE="ls:ls *:cd:cd -:cd ..:pwd:exit:date:reset:clear: * --help"  # Make some commands not show up in history
+HISTSIZE=$((2 ** 20))           # History size in memory ( max: 10000000 )
+SAVEHIST=$HISTSIZE              # The number of histsize ( max: 10000000 )
 LISTMAX=50                      # The size of asking history
 KEYTIMEOUT=20                   # Reduce delay after you hit the <ESC> to 0.2 seconds
 #https://github.com/pgilad/dotfiles/blob/master/link/.zshrc
@@ -27,14 +28,6 @@ if [[ $UID == 0 ]]; then
     unset HISTFILE
     export SAVEHIST=0
 fi
-
-case $HIST_STAMPS in
-  "mm/dd/yyyy") alias history='fc -fl 1' ;;
-  "dd.mm.yyyy") alias history='fc -El 1' ;;
-  "yyyy-mm-dd") alias history='fc -il 1' ;;
-  *) alias history='fc -l 1' ;;
-esac
-
 
 #
 # Options  http://zsh.sourceforge.net/Doc/Release/Options.html#History

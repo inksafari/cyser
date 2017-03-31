@@ -1,0 +1,104 @@
+# https://github.com/caskroom/homebrew-cask/tree/master/Casks
+
+cask 'hammerspoon'
+#cask 'osxfuse'
+
+# Browsers
+# ----------------------------------------------------------------------------
+cask 'flash-ppapi'                # Adobe Flash Player PPAPI (plugin for Opera and Chromium)
+cask 'flash-npapi'                # Adobe Flash Player NPAPI (plugin for Safari and Firefox)
+
+cask 'firefox'
+#casl 'firefoxdeveloperedition'
+
+cask 'google-chrome'
+#cask 'google-chrome-beta'
+#cask 'google-chrome-canary'
+#cask 'vivaldi'
+#cask 'eloston-chromium'          # Eloston/ungoogled-chromium
+#cask 'freesmug-chromium'         # http://www.freesmug.org/chromium
+
+#cask 'safari-technology-preview'
+
+
+# Cloud storage
+# ----------------------------------------------------------------------------
+#cask 'dropbox'
+#cask 'google-drive'
+#cask 'google-cloud-sdk'
+
+# Coding
+# ----------------------------------------------------------------------------
+cask 'meld'
+
+# Database
+# ----------------------------------------------------------------------------
+#cask 'sqlitebrowser'
+
+# Editors
+# ----------------------------------------------------------------------------
+cask 'atom-beta'
+cask 'coteditor'
+cask 'rstudio'
+cask 'visual-studio-code'
+
+# Viewers
+# ----------------------------------------------------------------------------
+cask 'basictex'    # full: mactex
+cask 'calibre'
+cask 'cheatsheet'
+cask 'skim'
+cask 'wkhtmltopdf'
+
+# Media
+# ----------------------------------------------------------------------------
+#cask 'airserver'
+#https://github.com/typcn/bilibili-mac-client
+cask 'iina'           # https://github.com/lhc70000/iina
+
+# Menubar
+# ----------------------------------------------------------------------------
+cask 'meteorologist'  # weather
+cask 'squirrel'       # Rime IME ( 鼠鬚管 Squirrel )
+
+# Networking
+# ----------------------------------------------------------------------------
+cask 'dripcap'
+#cask 'kismac'
+cask 'whatroute'
+
+# QuickLook enhancement ( GitHub repo: sindresorhus/quick-look-plugins )
+# ----------------------------------------------------------------------------
+#cask 'betterzipql'
+cask 'qlcolorcode'
+#cask 'qlimagesize'
+cask 'qlmarkdown'
+#cask 'qlstephen'
+cask 'quicklook-csv'
+cask 'quicklook-json'
+#cask 'webpquicklook'
+
+# Terminal emulator
+# ----------------------------------------------------------------------------
+# Alacritty  https://github.com/jwilm/alacritty
+cask 'hyper'          # CJK? https://github.com/zeit/hyper/pull/1536
+cask 'iterm2-beta'
+
+# VM
+# ----------------------------------------------------------------------------
+#cask 'virtualbox'
+#cask 'virtualbox-extension-pack'
+#cask 'vagrant'
+#cask 'vagrant-manager'
+
+# Commercial software ( $: ✓ )
+# ----------------------------------------------------------------------------
+cask 'arq'
+cask 'daisydisk'
+cask 'devonthink'     # DEVONthink Personal
+cask 'foldingtext'
+cask 'forklift'
+cask 'little-snitch'
+cask 'manuscripts'
+casl 'pdfpen'         # pro: pdfpenpro
+cask 'papers'

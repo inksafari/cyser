@@ -1,0 +1,22 @@
+# Golang
+#brew 'go'
+
+# Node.js
+#brew 'node'
+#brew 'n'
+#brew 'yarn'
+
+# Python
+brew 'python', args: ['universal', 'with-tcl-tk', 'with-unicode-ucs4']
+brew 'python3'
+brew 'pyenv'
+
+# R
+#brew 'homebrew/science/r'
+
+# Ruby
+#brew 'ruby'
+#brew 'rbenv'
+#brew 'ruby-build'
+#brew 'ruby-install'
+#brew 'chruby'

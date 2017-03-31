@@ -36,11 +36,12 @@
 # templatedir = $XDG_CONFIG_HOME/git/template
 
 [commit]
-    gpgsign  = false
+    # gpgsign  = if-asked
     template = $XDG_CONFIG_HOME/git/message
     verbose  = true
 
 [fetch]
+    recurseSubmodules = true
     prune = true
 
 [filter "lfs"]
@@ -56,12 +57,10 @@
 [grep]
     extendregexp = true
 
-[hub]
-    protocol = https
-
 [log]
     abbrevCommit = true
     decorate     = short
+    # mailmap    = true
 
 [pretty]
     # https://git-scm.com/docs/pretty-formats
@@ -83,6 +82,12 @@
     # for `git reflog`
     relg = "%C(cyan)%h%Creset %gd %gs %Cgreen(%cr)%Creset"
 
+[branch]
+    # Automatic remote tracking
+    autoSetupMerge = always
+    # Force all new branches to automatically use rebase
+    autoSetupRebase = always
+
 [pull]
     rebase = true
 
@@ -93,11 +98,37 @@
     autoStash = true
     autoSquash = true
 
+# See https://help.github.com/articles/checking-out-pull-requests-locally
+[remote "origin"]
+    fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+
+[submodule]
+    # Fetch submodules in parallel, with a reasonable number of jobs
+    fetchJobs = 4
+
 [tag]
     sort = version:refname
 
 #[tar "tar.xz"]
 #    command = xz -c
+
+# ============================================================================
+# Plugins
+# ============================================================================
+# {so-fancy/diff-so-fancy, motemen/ghq, github/hub}
+
+#[diff-so-fancy]
+
+#[ghq]
+#    root = ~/src
+#    root = ~/go/src
+#[ghq "alias"]
+#[ghq "import"]
+#    starred = github-list-starred
+#    user = getgithubrepos
+
+[hub]
+    protocol = https
 
 # ============================================================================
 # Colors / Colours
@@ -161,31 +192,38 @@
     algorithm           = patience
     compactionHeuristic = true
 [diff "nodiff"]
-    command = true
+    command             = true
 [diff "bin"]
-    textconv = hexdump -v -C
+    textconv            = hexdump -v -C
 [diff "utf-16"]
-    textconv = iconv -f utf-16 -t utf-8
+    textconv            = iconv -f utf-16 -t utf-8
+[diff "pandoc2md"]
+    textconv            = pandoc --to=commonmark --columns=80
+    prompt              = false
 [diff "lisp"]
-    # xfuncname = "^\\([^ ]+ [^ ]+"
-    # xfuncname = "^(\\(.*)$"
-    xfuncname = "^(\\((def|.*let|with-).*)$"
+    # xfuncname         = "^\\([^ ]+ [^ ]+"
+    # xfuncname         = "^(\\(.*)$"
+    xfuncname           = "^(\\((def|.*let|with-).*)$"
 [diff "org"]
-    xfuncname = "^\\*+ +.*$"
+    xfuncname           = "^\\*+ +.*$"
 [diff "tex"]
-    xfuncname = "^(\\\\(sub)*section\\{.*)$"
-    wordRegex = "\\\\[a-zA-Z]+|[{}]|\\\\.|[^\\{}[:space:]]+"
+    xfuncname           = "^(\\\\(sub)*section\\{.*)$"
+    wordRegex           = "\\\\[a-zA-Z]+|[{}]|\\\\.|[^\\{}[:space:]]+"
 [diff "texinfo"]
-    xfuncname = "^@node[ \t][ \t]*\\([^,][^,]*\\)"
+    xfuncname           = "^@node[ \t][ \t]*\\([^,][^,]*\\)"
 [diff "xml"]
-    textconv = xmllint --format --recover
+    textconv            = xmllint --format --recover
 [diff "pdf"]
-    textconv = pdfinfo
+    textconv            = pdfinfo
 [diff "zip"]
-    textconv = unzip -v
-    binary = true
+    textconv            = unzip -v
+    binary              = true
 [difftool]
-    prompt = false
+    prompt              = false
+# https://abenori.blogspot.com/2016/06/latexdiff.html
+[difftool.latex]
+    # cmd = latexdiff "$LOCAL" "$REMOTE" --exclude-textcmd="section,subsection,subsubsection"
+    cmd = latexdiff -t CFONT -s COLOR "$LOCAL" "$REMOTE" > "$REMOTE.diff.tex" && latexmk --pdf "$REMOTE.diff.tex" && latexmk -c "$REMOTE.diff.tex"
 
 # Merge Conflict
 # --------------
@@ -220,6 +258,7 @@
 # Aliases
 # ============================================================================
 
+# git clone gh:user/repo
 [url "git@github.com:"]
     insteadOf = "gh:"
     pushInsteadOf = "github:"
@@ -239,9 +278,12 @@
 
 [alias]
     # 
-    # misc ( aliases, status, tags, ... )    
+    # misc ( aliases, status, ... )    
     #
     # https://github.com/yulii/dotfiles/blob/master/.gitconfig
+    # https://github.com/blaenk/dots/blob/master/git/.gitconfig
+    # fzf list aliases
+    # aliases = "! TMUX_FZF=1 zsh -i -c fzf-git-aliases"
     as = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
     get = !git pull --rebase && git submodule update --init --recursive
     get-ign = "!f() { curl -L -s https://www.gitignore.io/api/$@; }; f"
@@ -298,6 +340,11 @@
     co = checkout
 
     #
+    # tags
+    #
+    # https://github.com/OzzyCzech/dotfiles/blob/master/.gitconfig
+
+    #
     # log
     #   - https://git-scm.com/docs/git-log
     #   - https://gist.github.com/datagrok/4221767
@@ -318,6 +365,8 @@
     df = diff --patch-with-stat             # unstaged    
     ds = diff --patch-with-stat --cached    # staged
     dh = diff --patch-with-stat HEAD^ HEAD
+    # Latexdiff
+    ldiff = difftool -y -t latex
 
     #
     # merge

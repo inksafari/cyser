@@ -1,0 +1,308 @@
+#!/usr/bin/env zsh
+
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# Defines environment variables.
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+ulimit -c unlimited
+
+# ----------------------------------------------------------------------
+# Locales ( LC_ALL -> LC_* -> LANG )
+# ----------------------------------------------------------------------
+export LANG=en_US.UTF-8
+export LANGUAGE=$LANG
+export LC_CTYPE=$LANG
+export LC_COLLATE=$LANG
+export LC_MESSAGES=$LANG
+#LC_MONETARY
+#LC_NUMERIC
+#LC_TIME
+
+# ----------------------------------------------------------------------
+# Editors
+# ----------------------------------------------------------------------
+export EDITOR='nano'
+export VISUAL=$EDITOR
+
+# (neo)vim
+#export VIMINIT='source ${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim'  # vimrc
+#export VIMPAGER_RC=${XDG_CONFIG_HOME:-$HOME/.config}/nvim/init.vim
+#export EDITOR='vim'
+#export VISUAL=$EDITOR
+#export PAGER='vimpager'
+#export MANPAGER=$PAGER
+#export BROWSER=$PAGER
+
+# ----------------------------------------------------------------------
+# LESS
+# ----------------------------------------------------------------------
+
+# Set the Less input preprocessor ---------------------------------- {{{
+# https://github.com/suzuki/dotfiles/blob/master/.zshrc
+
+# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
+if (( $#commands[(i)lesspipe(|.sh)] )); then
+    export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
+fi
+
+#for lpipe in lesspipe lesspipe.sh; do
+#    if type -f $lpipe &> /dev/null; then
+#        export LESSOPEN="| $lpipe %s"
+#        export LESSCLOSE="$lpipe %s %s"
+#    fi
+#done
+
+# Colored man pages ------------------------------------------------ {{{
+# http://boredzo.org/blog/archives/2016-08-15/colorized-man-pages-understood-and-customized
+
+function man() {
+    LESS_TERMCAP_mb=$'\e[1;31m' \
+    LESS_TERMCAP_md=$'\e[1;31m' \
+    LESS_TERMCAP_me=$'\e[0m' \
+    LESS_TERMCAP_se=$'\e[0m' \
+    LESS_TERMCAP_so=$'\e[1;44;33m' \
+    LESS_TERMCAP_ue=$'\e[0m' \
+    LESS_TERMCAP_us=$'\e[1;32m' \
+    command man "$@"
+}
+
+# Options ---------------------------------------------------------- {{{
+#
+# -F:
+# -g: Highlight search results
+# -i: Ignore case when searching
+# -M: Prompt verbosely
+# -R: Print ANSI color sequences
+# -S: Cut of long lines instead of wrapping them
+# -w: Highlight the first new line after scrolling
+# -X:
+# -z: Keep four lines when scrolling
+#export LESS='-g -i -M -R -S -w -z-4'
+
+#export LESSCHARSET='utf-8'
+export LESSHISTFILE=$XDG_DATA_HOME/less_hist  # less/history
+export LESS='--no-init --LONG-PROMPT --ignore-case --quit-if-one-screen --RAW-CONTROL-CHARS --hilite-unread --tabs=4'
+export PAGER=$LESS
+export MANPAGER=$PAGER
+#export MANWIDTH='120'
+
+# ----------------------------------------------------------------------
+# Programs
+# ----------------------------------------------------------------------
+export ARCHFLAGS='-arch x86_64'
+export JOBS=max
+export BLOCK_SIZE="'1" # commas in ls, du, df output ( apply thousands separator to file sizes )
+export TIME_STYLE='long-iso' # 2017-03-29 22:54
+
+if [ -z $TMUX ]; then
+  export TERM=xterm-256color
+else
+  export TERM=screen-256color
+fi
+
+#export BROWSER=''
+#export GPG_TTY=$(tty)
+#export MAIL=''
+#export OOO_FORCE_DESKTOP=''
+
+# ----------------------------------------------------------------------
+# XDG Base Directory Specification
+# ----------------------------------------------------------------------
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+case ${OSTYPE} in
+  darwin*)
+    export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/Library/Caches}
+    export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/Library}
+  ;;
+  linux*)
+    export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+    export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+  ;;
+esac
+
+if [ ! -d /tmp/$LOGNAME ]; then
+    mkdir -p -m 700 /tmp/$LOGNAME
+fi
+export XDG_RUNTIME_DIR=/tmp/$LOGNAME                   # or $HOME/.tmp
+
+# ----------------------------------------------------------------------
+# $Home
+# ----------------------------------------------------------------------
+#
+# Node.js & {npm, yarn}
+#
+if (( $+commands[node] )); then
+    # REPL https://nodejs.org/api/repl.html#repl_environment_variable_options
+    export NODE_REPL_HISTORY=$XDG_DATA_HOME/node/node_repl_history
+    # Allow 32³ entries; the default is 1000.
+    export NODE_REPL_HISTORY_SIZE=32768
+    # see `npm config ls -l | grep /`
+    if (( $+commands[npm] )); then
+        export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
+        export NPM_CONFIG_CACHE=$XDG_CACHE_HOME/npm
+        export NPM_CONFIG_TMP=$XDG_RUNTIME_DIR/npm
+    fi
+fi
+
+#
+# tmux
+#
+if (( $+commands[tmux] )); then
+    export TMUX_HOME=$XDG_CONFIG_HOME/tmux
+    export TMUX_PLUGIN_MANAGER_PATH=$TMUX_HOME/plugins
+    export TPM_PATH=$TMUX_HOME/plugins
+    export TMUX_TMPDIR=$XDG_RUNTIME_DIR
+fi
+
+#
+# $XDG_CONFIG_HOME
+# https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
+# https://github.com/derimagia/dotfiles/blob/master/.config/zsh/.zshenv
+#
+#export       ANSIBLE_CONFIG=$XDG_CONFIG_HOME/ansible/ansible.cfg
+export            ATOM_HOME=$XDG_CONFIG_HOME/atom
+#export            CURL_HOME=$XDG_CONFIG_HOME/curl
+export              GIT_DIR=$XDG_CONFIG_HOME/git
+#export               HTOPRC=$XDG_CONFIG_HOME/htop/htoprc
+#export    HTTPIE_CONFIG_DIR=$XDG_CONFIG_HOME/httpie
+#export   JUPYTER_CONFIG_DIR=$XDG_CONFIG_HOME/jupyter
+#export         MPLCONFIGDIR=$XDG_CONFIG_HOME/mpl          # matplotlib
+#export             MPV_HOME=$XDG_CONFIG_HOME/mpv
+#export        PACKER_CONFIG=$XDG_CONFIG_HOME/packer
+#export               PSQLRC=$XDG_CONFIG_HOME/psql/psqlrc
+#export               WGETRC=$XDG_CONFIG_HOME/wget/wgetrc
+
+#
+# $XDG_DATA_HOME
+#
+#export          ASPELL_CONF=$XDG_DATA_HOME/aspell
+#export MACHINE_STORAGE_PATH=$XDG_DATA_HOME/docker/machine
+#export       MYSQL_HISTFILE=$XDG_DATA_HOME/mysql/history
+#export   PASSWORD_STORE_DIR=$XDG_DATA_HOME/password-store # https://www.passwordstore.org/
+#export         PSQL_HISTORY=$XDG_DATA_HOME/psql/history
+#export         VAGRANT_HOME=$XDG_DATA_HOME/vagrant        # default: ~/.vagrant.d
+
+#
+# $XDG_CACHE_HOME
+#
+#export     PACKER_CACHE_DIR=$XDG_CACHE_HOME/packer
+
+#
+# $XDG_RUNTIME_DIR
+#
+
+# ----------------------------------------------------------------------
+# $HOME/.own ( Private Config )
+# ----------------------------------------------------------------------
+[[ ! -d $HOME/{.own,.ssh} ]] && mkdir -p -m 700 $HOME/{.own,.ssh}
+
+#
+# AWS CLI
+#
+if (( $+commands[aws] )); then
+    export AWS_CONFIG_FILE='$XDG_CONFIG_HOME/aws/config'
+    export AWS_CREDENTIAL_FILE='$HOME/.own/aws-credentials'  # or $XDG_CONFIG_HOME/aws/credentials
+fi
+
+# GPG
+#export            GNUPGHOME=$XDG_CONFIG_HOME/gnupg  # $HOME/.gnupg
+
+# OpenSSH
+#export         SSH_KEY_PATH=$HOME/.ssh
+
+# ----------------------------------------------------------------------
+# Zsh
+# ----------------------------------------------------------------------
+export ZSHCONF=${ZDOTDIR:-$XDG_CONFIG_HOME}/shell # my zsh config files
+export ZSH_CACHE_DIR=$XDG_CACHE_HOME/shell        # ~/.cache/shell
+export TMPPREFIX=$XDG_CACHE_HOME/shell; [[ -d $TMPPREFIX ]] || mkdir -p $TMPPREFIX
+
+#
+# zplug ( plugin manager for Zsh )
+#
+export ZPLUG_HOME=$ZSHCONF/repos/zplug/zplug      # ~/.config/shell/repos/zplug/zplug
+export ZPLUG_CACHE_DIR=$XDG_CACHE_HOME/zplug      # ~/.cache/zplug
+export ZPLUG_REPOS=$ZSHCONF/repos                 # ~/.config/shell/repos
+export ZPLUG_CLONE_DEPTH=1
+export ZPLUG_THREADS=32
+
+#
+# Defining word endings
+#
+# https://github.com/tomsquest/dotfiles/blob/master/zsh/config.zsh
+# Allows to kill backward word path by path using ctrl+w
+# With this, ctrl+w on '/usr/bin' will produce '/usr'. Without it, '/usr/bin' is removed.
+# Default is: *?_-.[]~=/&;!#$%^(){}<>
+# autoload -U select-word-style && select-word-style normal
+export WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
+
+# ----------------------------------------------------------------------
+# Command-line Fuzzy Finder
+# ----------------------------------------------------------------------
+## search ( ack, ag, pt or ripgrep )
+#export ACKRC=$XDG_CONFIG_HOME/ack/ackrc
+#export ACK_PAGER_COLOR='less -x4SRFX'
+
+## menu ( percol, peco or fzf )
+#export FILTER='fzf-tmux:fzf:peco-tmux:peco'
+#export INTERACTIVE_FILTER='fzf'
+#export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+#export FZF_DEFAULT_OPTS='--reverse --inline-info'
+#export FZF_DEFAULT_OPTS='--extended --ansi --multi'
+
+# enhancd config
+#export ENHANCD_COMMAND=ed
+#export ENHANCD_FILTER=ENHANCD_FILTER=fzy:fzf:peco
+
+# ----------------------------------------------------------------------
+# Platform Specific
+# ----------------------------------------------------------------------
+# https://coderwall.com/p/zkwhqq/find-linux-distro
+if [[ $(uname) = 'Linux' ]]; then
+  if [ "$(which lsb_release)" ] ; then
+    DISTRO=$(lsb_release -is 2>/dev/null)
+  elif [ -f /etc/issue.net ] ; then
+    DISTRO=$(head -1 /etc/issue.net | sed 's/\([a-zA-Z]*\)\([0-9].*\)/\1/g' | sed 's/release//')
+    DISTRO=${DISTRO// /}
+  else
+    echo "Could not find Linux distro"
+  fi
+fi
+
+case ${OSTYPE} in
+  darwin*)
+    source $ZSHCONF/path.macos.zsh
+  ;;
+  linux*)
+    source $ZSHCONF/path.linux.zsh
+    # Linux distro
+    if [ $DISTRO = 'Arch' ]; then
+      command -v yaourt >/dev/null && export YAOURT_COLORS="\
+        dsc=0:\
+        grip=1;34:\
+        installed=1;42:\
+        lver=0;45:\
+        nb=1:\
+        od=1;41;5:\
+        other=1;35:\
+        pkg=1:\
+        ver=1;32\
+        votes=1;34"
+    fi
+  ;;
+esac
+
+# ----------------------------------------------------------------------
+# Loading local config files
+# ----------------------------------------------------------------------
+## Include local zshenv
+#if [[ -f "${ZDOTDIR:-$HOME}/zshenv.local" ]]; then
+#    source '${ZDOTDIR:-$HOME}/zshenv.local'
+#fi
+
+## Include standard zshrc
+#if [[ -o interactive ]]; then
+#    source '${ZDOTDIR:-$ZSHCONF}/zshrc'
+#fi
+
+## Disable loading system-wide zsh config files
+setopt NO_GLOBAL_RCS

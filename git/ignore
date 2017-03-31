@@ -1,6 +1,6 @@
 # Useful `.gitignore` templates:
-# https://github.com/github/gitignore
-# https://github.com/molovo/.files/blob/master/files/.gitignore_global
+# - https://github.com/github/gitignore
+# - https://github.com/molovo/.files/blob/master/files/.gitignore_global
 
 # ----------------------------------------------------------------------
 # | Windows cruft                                                      |
@@ -143,6 +143,11 @@ bower_components
 # ------------------
 node_modules
 npm-debug.log
+
+# SASS
+# ------------------
+.sass-cache
+scss-lint-report.xml
 
 # Tern.js
 # ------------------

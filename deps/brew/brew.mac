@@ -1,0 +1,313 @@
+#!/usr/bin/env bash
+#   - https://github.com/Homebrew/homebrew-core/tree/master/Formula
+#   - https://github.com/Homebrew/homebrew-dupes
+
+# ----------------------------------------------------------------------------
+# Common build dependencies
+# ----------------------------------------------------------------------------
+brew 'libressl'
+brew 'libssh2'
+brew 'openssl'
+brew 'homebrew/dupes/openssh'
+brew 'xz'
+
+brew 'base64'
+brew 'bison'
+brew 'curl', args: ['with-c-ares', 'with-gssapi', 'with-libidn', 'with-nghttp2']
+brew 'c-ares'
+brew 'glibc'
+brew 'libevent'
+brew 'libffi'
+brew 'libmcrypt'
+brew 'libmemcached'
+brew 'libmpc'
+brew 'libksba'
+brew 'libxml2'
+brew 'libxslt'
+brew 'libyaml'
+brew 'homebrew/dupes/libpcap'
+brew 'homebrew/dupes/openldap'
+brew 'homebrew/dupes/m4'
+brew 'pcre'
+brew 'webp'
+brew 'sqlite'
+brew 'homebrew/dupes/tcl-tk'
+brew 'xlslib'
+brew 'xmlstarlet'
+brew 'zlib'
+brew 'zopfli', args: ['HEAD']
+
+# (un)compression
+brew 'homebrew/dupes/unzip'
+brew 'p7zip'
+brew 'bzip2'
+brew 'pbzip2' # Parallel BZIP2
+brew 'lbzip2' # Parallel bzip2
+brew 'homebrew/dupes/gzip'
+brew 'pigz'   # Parallel gzip
+brew 'pxz'    # Parallel XZ
+brew 'pixz'   # Parallel, indexed xz
+brew 'unar'   # https://unarchiver.c3.cx/commandline
+brew 'lz4'
+brew 'snappy'
+
+# ----------------------------------------------------------------------------
+# Build tools
+# ----------------------------------------------------------------------------
+brew 'autoconf'
+brew 'automake'
+brew 'cmake', args: ['with-completion']
+brew 'gcc'
+brew 'libtool'
+brew 'llvm', args: ['with-glibc']
+brew 'homebrew/dupes/make'
+brew 'pkg-config'
+
+# ----------------------------------------------------------------------------
+# GNU command-line utilities
+# ----------------------------------------------------------------------------
+# GNU? https://www.gnu.org/software/guix/packages/
+#
+# Do not prepend 'g' to the binary: brew install ooo --with-default-names
+
+brew 'binutils'  , args: ['with-default-names']
+brew 'coreutils' , args: ['with-default-names']
+brew 'homebrew/dupes/diffutils'
+brew 'findutils'
+brew 'gawk'
+brew 'gdbm'
+brew 'gettext'
+brew 'gmp'
+brew 'gnu-getopt'
+brew 'gnu-indent', args: ['with-default-names']
+brew 'gnu-sed'   , args: ['with-default-names']
+brew 'gnu-tar'   , args: ['with-default-names']
+brew 'gnu-units' , args: ['with-default-names']
+brew 'gnu-which' , args: ['with-default-names']
+brew 'gnutls'
+brew 'gpatch'
+brew 'md5sha1sum'
+brew 'moreutils'
+brew 'homebrew/dupes/ncurses'
+brew 'parallel'
+brew 'potrace'
+brew 'readline'
+brew 'watch'
+brew 'wdiff'     , args: ['with-gettext']
+brew 'wget'      , args: ['with-pcre']
+brew 'gnupg2'
+
+# macOS ships a GNU version, but too old ( 2.x )
+# tap 'homebrew/dupes'
+# https://github.com/Homebrew/homebrew-dupes
+brew 'bash', args: ['force']        # Bash 4.x
+brew 'homebrew/dupes/grep', args: ['with-default-names']
+brew 'homebrew/dupes/less'
+brew 'homebrew/dupes/nano'
+brew 'homebrew/dupes/screen'
+
+# ----------------------------------------------------------------------------
+# Programming languages
+# ----------------------------------------------------------------------------
+brew 'go'
+brew 'lua'
+brew 'luajit'
+brew 'node'
+brew 'yarn'
+brew 'perl'
+brew 'python', args: ['universal', 'with-tcl-tk', 'with-unicode-ucs4']
+brew 'python3'
+brew 'homebrew/science/r'
+brew 'ruby'
+brew 'rust'
+
+# ----------------------------------------------------------------------------
+# non-GNU utilities
+# ----------------------------------------------------------------------------
+brew 'cheat' # alternatives: tldr or bropages
+brew 'ccat'
+brew 'cloc'
+brew 'homebrew/dupes/diffstat'
+brew 'entr'
+brew 'fswatch'
+brew 'grc'   # "The Generic Colouriser": auto-colorizes the output of certain commands (like `ps`)
+brew 'htop'
+brew 'icdiff'
+brew 'jq'    # json
+brew 'lesspipe', args: ['with-syntax-highlighting']
+brew 'homebrew/dupes/lsof'
+brew 'ncdu'
+brew 'neofetch'
+brew 'osquery'
+brew 'proxychains-ng'
+brew 'psutils'
+brew 'pstree'
+brew 'pv', args: ['with-gettext']
+brew 'homebrew/dupes/rsync'
+brew 'thefuck'
+brew 'tree'
+
+# GPG tools
+# https://gpgtools.org/
+
+# macOS only
+brew 'carthage'
+brew 'dark-mode'
+brew 'reattach-to-user-namespace'
+brew 'terminal-notifier'
+brew 'xhyve', args: ['HEAD']
+
+# ----------------------------------------------------------------------------
+# Media
+# ----------------------------------------------------------------------------
+# Images / Graphs
+brew 'gd'
+brew 'freetype'
+brew 'jp2a'
+brew 'imagemagick', args: ['with-libtiff', 'with-webp']
+brew 'libcaca', args: ['with-imlib2']
+brew 'libpng'
+brew 'guetzli'        # google/guetzli
+brew 'homebrew/science/vips'
+brew 'webkit2png'
+brew 'gnuplot', args: ['with-pdflib-lite', 'with-wxmac']
+brew 'graphviz', args: ['with-app', 'with-bindings', 'with-librsvg']
+brew 'plantuml'
+
+# Audio & Video
+brew 'ffmpeg', args: ['with-libvorbis', 'with-libvpx', 'with-rtmpdump' , 'with-theora', 'with-tools']
+brew 'mpv', args: ['']
+## Download manager
+brew 'aria2'
+brew 'youtube-dl'
+brew 'you-get'
+## Search and download subtitles
+#brew 'subliminal'
+#brew 'submarine'
+
+# ----------------------------------------------------------------------------
+# Version control
+# ----------------------------------------------------------------------------
+# brew search git
+#brew 'libgit2'
+brew 'git', args: ['with-blk-sha1', 'with-gettext', 'with-pcre', 'without-completions']
+#brew 'git-flow-avh'
+brew 'git-lfs'
+#brew 'ghq'
+#brew 'gibo'
+#brew 'gist'
+brew 'hub'
+
+# diff
+brew 'diff-so-fancy'
+#brew 'spaceman-diff'
+
+# ----------------------------------------------------------------------------
+# Grep-like tools
+# ----------------------------------------------------------------------------
+brew 'ack'
+brew 'ag'      # the_silver_searcher
+brew 'pt'      # the_platinum_searcher
+brew 'ripgrep' # rp
+#brew 'sift'
+
+# ----------------------------------------------------------------------------
+# Shell
+# ----------------------------------------------------------------------------
+brew 'aspell', args: ['with-lang-en']
+brew 'ispell'
+brew 'direnv'
+# brew 'imgcat'
+brew 'shellcheck'
+brew 'tmux'
+brew 'zsh', args: ['without-etcdir']
+#brew 'zplug' , args: ['with-zsh']
+
+# Completions
+# brew search -completion
+
+
+if ENV.fetch("SHELL", "") != "/usr/local/bin/zsh"
+  puts "To use the Homebrew-installed ZSH:"
+  puts "  sudo echo /usr/local/bin/zsh >> /etc/shells"
+  puts "  chsh -s /usr/local/bin/zsh"
+end
+
+# Switch to using brew-installed zsh as default shell
+#if ! fgrep -q '/usr/local/bin/zsh' /etc/shells; then
+#  echo '/usr/local/bin/zsh' | sudo tee -a /etc/shells;
+#  chsh -s /usr/local/bin/zsh;
+#fi;
+
+# ----------------------------------------------------------------------------
+# Networking
+# ----------------------------------------------------------------------------
+brew 'arping'
+brew 'fping'
+brew 'hashcat'
+brew 'geoip'
+brew 'ipfs'
+brew 'jmeter'
+brew 'mitmproxy'
+brew 'mtr'
+#brew 'namebench'
+#brew 'nmap'
+brew 'sipcalc'
+brew 'tcptraceroute'
+#brew 'wifi-password'
+brew 'homebrew/dupes/tcpdump'
+brew 'homebrew/dupes/whois'
+
+# ----------------------------------------------------------------------------
+# {dev,prod} environments
+# ----------------------------------------------------------------------------
+brew 'ievms'
+
+# SSH
+brew 'keychain'
+brew 'ssh-copy-id'
+brew 'stormssh'
+
+# file systems
+# https://github.com/Homebrew/homebrew-fuse/tree/master/Formula
+brew 'encfs'
+brew 'ext2fuse'
+#brew 'ntfs-3g'
+brew 'sshfs'
+# brew 'docker-machine-nfs'
+
+# wine
+brew 'wine', args: ['devel']
+brew 'winetricks'
+
+# ----------------------------------------------------------------------------
+# Cloud storage
+# ----------------------------------------------------------------------------
+brew 'aws-cfn-tools'
+brew 'awscli'
+brew 'rclone'
+brew 'homebrew/fuse/sshfs'
+brew 'syncthing', restart_service: :changed
+
+# ----------------------------------------------------------------------------
+# Databases
+# ----------------------------------------------------------------------------
+#brew 'postgresql'
+#brew 'pgcli'
+#brew 'sqldiff'
+#brew 'sqlmap'
+#brew 'sqlparse'
+
+#tap  'simon-engledew/gocmdpev'
+#brew 'gocmdpev'
+
+# ----------------------------------------------------------------------------
+# Misc. other programs
+# ----------------------------------------------------------------------------
+brew 'pdfgrep', args: ['with-pcre']
+brew 'pandoc'
+brew 'pandoc-citeproc'
+brew 'pandoc-crossref'
+brew 'hugo'
+brew 'micro'          # terminal-based text editor
+brew 'sphinx-doc'

@@ -1,9 +1,10 @@
 #!/usr/bin/env zsh
-# ----------------------------------------------------------------------
-# Startup file read in interactive login shells.
-# ----------------------------------------------------------------------
-## https://github.com/hypnoglow/dotfiles/blob/master/zsh/zlogin
 
+# <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+# Startup file read in interactive login shells.
+# >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+# https://github.com/hypnoglow/dotfiles/blob/master/zsh/zlogin
 unfunction compinit
 autoload -Uz compinit
 compinit -i -d "${zcompdump}"  # ZSH_COMPDUMP

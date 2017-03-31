@@ -1,6 +1,7 @@
-# copied and modified from
-#   https://github.com/pirj/dotfiles
-#   https://github.com/docwhat/dotfiles
+# vim: ft=ruby
+# https://github.com/pirj/dotfiles
+# https://github.com/docwhat/dotfiles
+# https://github.com/elasticdog/dotfiles/blob/master/ruby/.irbrc
 
 #require 'irb/completion'
 #require 'irb/ext/save-history'

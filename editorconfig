@@ -1,11 +1,12 @@
 # https://github.com/editorconfig/editorconfig/wiki/EditorConfig-Properties
+# https://ukupat.github.io/tabs-or-spaces/
 root = true
 
 [*]
 charset = utf-8
 end_of_line = LF
 indent_style = space
-indent_size = 2
+indent_size = 4
 insert_final_newline = false
 trim_trailing_whitespace = true
 
@@ -13,20 +14,33 @@ trim_trailing_whitespace = true
 indent_style = tab
 indent_size = 4
 
-[*.{html,xml,xhtml}]
-indent_style = tab
-tab_width = 2
+[*.{sh,bash,zsh,zshenv,zprofile,zshrc,zlogin,zlogout}]
+max_line_length = 78
+indent_style = space
+indent_size = 4
 
-[*.css]
-insert_final_newline = true
+# HTML, JS, Ruby, Sass
+[*.{html,xml,xhtml,js,rb,sass,scss}]
+indent_style = space
+indent_size  = 2
 
-[*.{sass,scss}]
-insert_final_newline = true
+[{Gemfile*,Rakefile}]
+indent_style = space
+indent_size = 2
 
-[*.{js,json}]
-insert_final_newline = true
+[{.{yaml,yml,json}]
+indent_style = space
+indent_size = 2
 
 [*.toml]
+indent_style = space
+indent_size = 4
+
+[*.go]
+indent_style = tab
+indent_size = 4
+
+[*.py]
 indent_style = space
 indent_size = 4
 
@@ -37,10 +51,3 @@ trim_trailing_whitespace = false
 max_line_length = off
 indent_size = 4
 trim_trailing_whitespace = false
-
-[*.py]
-indent_style = space
-indent_size = 4
-
-[*.{sh,zsh,zshenv,zprofile,zshrc,zlogin,zlogout}]
-max_line_length = 78

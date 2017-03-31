@@ -1,0 +1,13 @@
+# --- Ruby -------------------------------------------------------------------
+awesome_print
+benchmark-ips
+bundler
+bundle-audit
+hirb
+nokogiri
+pry
+rake
+rubocop
+rubocop-cask
+ruby-beautify
+scss_lint
