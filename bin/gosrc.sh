@@ -1,31 +1,20 @@
 #!/usr/bin/env bash
+# Install Golang on Linux
+# --------------------------------------------------
+export GO_VERSION=${1:-"1.9"}           # https://golang.org/dl/
+export GO_DOWNLOAD_URL="https://storage.googleapis.com/golang"
+export GO_FILE="go$GO_VERSION.linux-amd64.tar.gz"
+export GO_ROOT=$HOME/.local/lib/golang  # GOROOT ( source code of Golang )
+export GO_PATH=$HOME/.local/lib/go      # GOPATH ( Golang pkgs )
 
-# Install Golang on Ubuntu Linux
-# ----------------------------------------------------------------------
-# or https://gist.github.com/jacoelho/fb989f8c25c3ca7d5db5
-# copied and modified from https://gist.github.com/jniltinho/8758e15a9ef80a189fce
-#
-# usage:
-# sudo chmod u+x ~/bin/gosrc.sh && bash ~/bin/gosrc.sh && go version && go env
+rm -rf $GO_ROOT && mkdir -p $GO_ROOT/$GO_VERSION
+test -d $GO_PATH || mkdir -p $GO_PATH
 
-GO_URL="https://storage.googleapis.com/golang"
-GO_VERSION=${1:-"1.7.1"}                         # https://golang.org/dl/
-GO_FILE="go$GO_VERSION.linux-amd64.tar.gz"
-GO_ROOT=$HOME/.local/share/golang                # source code of Golang
-GO_PATH=$HOME/.local/lib/go                      # Go packages
+wget -q $GO_DOWNLOAD_URL/$GO_FILE 
+wget -q $GO_DOWNLOAD_URL/$GO_FILE.sha256
+echo "$(cat $GO_FILE.sha256) $GO_FILE" | sha256sum -c -
 
-#DISTRO=`lsb_release -ds | awk -F ' ' '{printf $1}' | tr A-Z a-z`
-#DISTRO_VERSION=`lsb_release -cs`
-
-rm -rf ${GO_ROOT} && mkdir ${GO_ROOT}
-
-if [ ! -d ${GO_PATH} ]; then
-    mkdir ${GO_PATH}
-fi
-
-cd $HOME
-wget --no-check-certificate ${GO_URL}/${GO_FILE}
-tar -xzf ${GO_FILE} -C ${GO_ROOT}
-rm ${GO_FILE}
-echo 'Done!'
-
+tar -C $GO_ROOT/$GOVERSION -xzf $GO_FILE
+rm $GO_FILE $GO_FILE.sha256
+echo "$(go version)"
+echo "go to https://golang.org/doc/code.html and enjoy :D"
