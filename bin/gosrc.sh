@@ -10,8 +10,7 @@ export GO_PATH=$HOME/.local/lib/go      # GOPATH ( Golang pkgs )
 rm -rf $GO_ROOT && mkdir -p $GO_ROOT/$GO_VERSION
 test -d $GO_PATH || mkdir -p $GO_PATH
 
-wget -q $GO_DOWNLOAD_URL/$GO_FILE 
-wget -q $GO_DOWNLOAD_URL/$GO_FILE.sha256
+wget -q $GO_DOWNLOAD_URL/$GO_FILE{,.sha256}
 echo "$(cat $GO_FILE.sha256) $GO_FILE" | sha256sum -c -
 
 tar -C $GO_ROOT/$GOVERSION -xzf $GO_FILE
