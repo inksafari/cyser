@@ -14,6 +14,6 @@ wget -q $GO_DOWNLOAD_URL/$GO_FILE{,.sha256}
 echo "$(cat $GO_FILE.sha256) $GO_FILE" | sha256sum -c -
 
 tar -C $GO_ROOT/$GOVERSION -xzf $GO_FILE
-rm $GO_FILE $GO_FILE.sha256
+rm $GO_FILE{,.sha256}
 echo "$(go version)"
 echo "go to https://golang.org/doc/code.html and enjoy :D"
