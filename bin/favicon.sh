@@ -7,6 +7,8 @@ if [ $# -ne 1 ]; then
   exit 0;
 fi;
 
+SRC=$1
+
 for DIM in 16 32 64 144 152 180 192
 do
     convert -resize ${DIM}x${DIM}^ ${SRC} tmp-favicon-${DIM}.png
