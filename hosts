@@ -1,5 +1,3 @@
-# tool: https://github.com/0xl3vi/hostsctl
-
 # localhost
 127.0.0.1 localhost
 
@@ -31,7 +29,3 @@
 :: apis.map.qq.com
 :: lbs.map.qq.com
 :: lbssp.map.qq.com
-
-# Ads
-# https://github.com/zcbenz/dotfiles/blob/master/etc/hosts
-# https://github.com/kcschan/AdditionalAdblock
