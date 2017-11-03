@@ -1,11 +1,37 @@
-#mas '1Password',   id: 443987910
-#mas 'CotEditor',   id: 1024640650
-#mas 'Reeder',      id: 880001334
-#mas 'SnippetsLab', id: 1006087419
+# -*- mode: ruby -*-
+#mas 'Soulver',                  id: 413965349
+#mas 'VOX',                      id: 461369673
+#mas 'Wokabulary',               id: 599273012     # Vocab trainer
 
 # Apple Inc.
-#mas 'iMovie',  id: 408981434
-mas 'Xcode',   id: 497799835
-mas 'Keynote', id: 409183694
-mas 'Numbers', id: 409203825
-mas 'Pages',   id: 409201541
+# --------------------------------------------------------
+#mas 'iMovie',                   id: 408981434
+mas 'Xcode',                     id: 497799835
+mas 'Keynote',                   id: 409183694
+mas 'Numbers',                   id: 409203825
+mas 'Pages',                     id: 409201541
+
+# Browsers
+# --------------------------------------------------------
+#mas 'Reeder',                   id: 880001334     # Feed reader
+#mas 'Realm Browser',            id: 1007457278
+
+# Crypto & Security
+# --------------------------------------------------------
+
+# Editors
+# --------------------------------------------------------
+mas 'CotEditor',                 id: 1024640650
+#mas 'Deckset',                  id: 847496013     # Markdown presentations
+#mas 'MultiMarkdown Composer 4', id: 1275176220    # http://multimarkdown.com/composer4/
+#mas 'SnippetsLab',              id: 1006087419
+
+# Finance
+# --------------------------------------------------------
+
+# Menubar
+# --------------------------------------------------------
+#mas 'CCMenu',                   id: 603117688     # CI status in menu
+
+# Messaging
+# --------------------------------------------------------
