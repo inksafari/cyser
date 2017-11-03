@@ -1,25 +1,105 @@
+# vim: set ft=ruby
 # https://github.com/caskroom/homebrew-cask/tree/master/Casks
 
+# System utilities
+# ----------------------------------------------------------------------------
+cask 'java'
+#cask 'zulu'                      # OpenJDK for macOS
+cask 'xquartz'
+
+#cask 'alfred'
+#cask 'bartender'
+#cask 'bettertouchtool'
+cask 'daisydisk'
+cask 'flux'
+cask 'forklift'
 cask 'hammerspoon'
-#cask 'osxfuse'
+cask 'little-snitch'
+#cask 'karabiner-elements'
+cask 'keypad-layout'              # https://github.com/janten/keypad-layout
+
+# IME
+#cask 'openvanilla'
+#cask 'mcbopomofo'                # 小麥注音輸入法
+#cask 'squirrel'                  # Rime IME ( 鼠鬚管 Squirrel )
+
+# Menubar
+#cask 'meteorologist'             # weather
+#cask 'syncthing-bar'
+#cask 'trailer'                   # Managing Pull Requests and Issues For GitHub
+
+# QuickLook enhancement ( GitHub repo: sindresorhus/quick-look-plugins )
+# ----------------------------------------------------------------------------
+cask 'betterzipql'
+#cask 'provisionql'
+cask 'qlcolorcode'
+cask 'qlimagesize'
+cask 'qlmarkdown'
+#cask 'qlprettypatch'
+cask 'qlstephen'
+cask 'qlvideo'
+#cask 'quicklookase'
+cask 'quicklook-csv'
+cask 'quicklook-json'
+#cask 'suspicious-package'
+cask 'webpquicklook'
+
+# Password managers
+# ----------------------------------------------------------------------------
+#cask '1password'
+#cask 'macpass'                   # KeePass client; https://github.com/mstarke/MacPass
+#cask 'keepassxc'                 # KeePass client; https://keepassxc.org/
+#cask 'gpgtools'                  # https://gpgtools.org/
 
 # Browsers
 # ----------------------------------------------------------------------------
-cask 'flash-ppapi'                # Adobe Flash Player PPAPI (plugin for Opera and Chromium)
-cask 'flash-npapi'                # Adobe Flash Player NPAPI (plugin for Safari and Firefox)
+#cask 'flash-ppapi'               # Adobe Flash Player PPAPI (plugin for Opera and Chromium)
+#cask 'flash-npapi'               # Adobe Flash Player NPAPI (plugin for Safari and Firefox)
 
-cask 'firefox'
+#cask 'firefox'
+#cask 'firefox-esr'
 #casl 'firefoxdeveloperedition'
-
-cask 'google-chrome'
-#cask 'google-chrome-beta'
-#cask 'google-chrome-canary'
-#cask 'vivaldi'
-#cask 'eloston-chromium'          # Eloston/ungoogled-chromium
-#cask 'freesmug-chromium'         # http://www.freesmug.org/chromium
-
 #cask 'safari-technology-preview'
 
+#cask 'google-chrome'
+#cask 'google-chrome-beta'
+#cask 'google-chrome-canary'
+#cask 'beaker-browser'            # beakerbrowser.com
+#cask 'blisk'                     # blisk.io
+#cask 'brave'                     # github.com/brave/browser-laptop
+cask 'cliqz'                      # cliqz.com/en/
+#cask 'eloston-chromium'          # github.com/Eloston/ungoogled-chromium
+#cask 'freesmug-chromium'         # www.freesmug.org/chromium
+cask 'iridium-extra'              # iridiumbrowser.de
+# https://www.kinza.jp/
+#cask 'sleipnir'                  # www.fenrir-inc.com/jp/sleipnir/
+#cask 'vivaldi'
+
+# Games
+# ----------------------------------------------------------------------------
+#cask 'steam'
+#cask 'supertuxkart'
+
+# Multimedia
+# ----------------------------------------------------------------------------
+#cask 'airserver'
+#cask 'plex-media-player'
+
+cask 'iina'                       # https://github.com/lhc70000/iina
+#cask 'radiant-player'            # Radiant Player for Google Play Music™
+#cask 'spotify'
+#cask 'vox'
+#cask 'vox-preferences-pane'
+
+#cask 'audacity'                  # Audio editor
+#cask 'handbrake'                 # Video encoding
+#cask 'subler'                    # Edit metadata of videos
+cask 'xld'                        # http://tmkk.undo.jp/xld/index_e.html
+
+# Backup
+# ----------------------------------------------------------------------------
+cask 'arq'
+#cask 'superduper'
 
 # Cloud storage
 # ----------------------------------------------------------------------------
@@ -27,78 +107,98 @@ cask 'google-chrome'
 #cask 'google-drive'
 #cask 'google-cloud-sdk'
 
-# Coding
-# ----------------------------------------------------------------------------
-cask 'meld'
+# File Sharing
+#cask 'osxfuse'
+#cask 'sshfs'
+#cask 'nitroshare'
+#cask 'syncthing'
 
-# Database
-# ----------------------------------------------------------------------------
-#cask 'sqlitebrowser'
+# NAS
+#cask 'synology-cloud-station'
 
-# Editors
+# Design tools
+# ----------------------------------------------------------------------------
+#cask 'colorpicker-skalacolor'
+#cask 'adobe-photoshop-cc'
+#cask 'adobe-illustrator-cc'
+
+# Editors & IDEs
 # ----------------------------------------------------------------------------
 cask 'atom-beta'
-cask 'coteditor'
-cask 'rstudio'
-cask 'visual-studio-code'
+#cask 'coteditor'
+cask 'foldingtext'
+#cask 'visual-studio-code'
+#cask 'rodeo'                     # http://rodeo.yhat.com/
+#cask 'microsoft-r-open'
+#cask 'rstudio'
+
+#cask 'intellij-idea'
+#cask 'caskroom/versions/intellij-idea-ce'
+#cask 'jetbrains-toolbox'
+
+# Office
+# ----------------------------------------------------------------------------
+#cask 'microsoft-office'
+#cask 'manuscripts'               # manuscriptsapp.com
+#cask 'scrivener'                 # https://literatureandlatte.com/scrivener.php?platform=mac
+cask 'papers'                     # https://www.readcube.com/papers/
+#cask 'zotero'
 
 # Viewers
 # ----------------------------------------------------------------------------
-cask 'basictex'    # full: mactex
-cask 'calibre'
-cask 'cheatsheet'
+cask 'basictex'                   # full version: mactex
+cask 'tex-live-utility'
+#cask 'calibre'
+#cask 'cheatsheet'
+#cask 'devdocs'                   # Stratus3D/dotfiles/blob/master/scripts/setup/install/zeal.sh
+casl 'pdfpen'                     # pro: pdfpenpro
 cask 'skim'
-cask 'wkhtmltopdf'
+#cask 'wkhtmltopdf'
+#cask 'yacreader'
 
-# Media
+# Productivity
 # ----------------------------------------------------------------------------
-#cask 'airserver'
-#https://github.com/typcn/bilibili-mac-client
-cask 'iina'           # https://github.com/lhc70000/iina
+cask 'devonthink'                 # DEVONthink Personal
+#cask 'omnifocus'                 # https://www.omnigroup.com/omnifocus/
 
-# Menubar
+# Git clients
 # ----------------------------------------------------------------------------
-cask 'meteorologist'  # weather
-cask 'squirrel'       # Rime IME ( 鼠鬚管 Squirrel )
+cask 'fork'                       # https://git-fork.com/
+
+# Diff and merge tools
+# ----------------------------------------------------------------------------
+#cask 'meld'
+cask 'p4merge'
+
+# Database -> SQL clients
+# ----------------------------------------------------------------------------
+#cask 'bdash'
+#cask 'pgweb'
+#cask 'sql-tabs'
+#cask 'sqlitebrowser'
+#cask 'mysqlworkbench'
 
 # Networking
 # ----------------------------------------------------------------------------
-cask 'dripcap'
+#cask 'angry-ip-scanner'
+#cask 'dripcap'
 #cask 'kismac'
-cask 'whatroute'
+#cask 'whatroute'
+#cask 'wireshark'
 
-# QuickLook enhancement ( GitHub repo: sindresorhus/quick-look-plugins )
-# ----------------------------------------------------------------------------
-#cask 'betterzipql'
-cask 'qlcolorcode'
-#cask 'qlimagesize'
-cask 'qlmarkdown'
-#cask 'qlstephen'
-cask 'quicklook-csv'
-cask 'quicklook-json'
-#cask 'webpquicklook'
-
-# Terminal emulator
+# Terminal emulators
 # ----------------------------------------------------------------------------
 # Alacritty  https://github.com/jwilm/alacritty
-cask 'hyper'          # CJK? https://github.com/zeit/hyper/pull/1536
+cask 'hyper'                      # CJK? https://github.com/zeit/hyper/pull/1536
 cask 'iterm2-beta'
 
-# VM
+# Containers & VMs
 # ----------------------------------------------------------------------------
 #cask 'virtualbox'
 #cask 'virtualbox-extension-pack'
 #cask 'vagrant'
 #cask 'vagrant-manager'
+#cask 'vmware-fusion'
 
-# Commercial software ( $: ✓ )
+# Development tools
 # ----------------------------------------------------------------------------
-cask 'arq'
-cask 'daisydisk'
-cask 'devonthink'     # DEVONthink Personal
-cask 'foldingtext'
-cask 'forklift'
-cask 'little-snitch'
-cask 'manuscripts'
-casl 'pdfpen'         # pro: pdfpenpro
-cask 'papers'
