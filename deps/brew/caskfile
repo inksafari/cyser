@@ -1,4 +1,4 @@
-# vim: set ft=ruby
+# -*- mode: ruby -*-
 # https://github.com/caskroom/homebrew-cask/tree/master/Casks
 
 # System utilities
@@ -7,6 +7,7 @@ cask 'java'
 #cask 'zulu'                      # OpenJDK for macOS
 cask 'xquartz'
 
+# Productivity
 #cask 'alfred'
 #cask 'bartender'
 #cask 'bettertouchtool'
@@ -14,19 +15,24 @@ cask 'daisydisk'
 cask 'flux'
 cask 'forklift'
 cask 'hammerspoon'
-cask 'little-snitch'
 #cask 'karabiner-elements'
 cask 'keypad-layout'              # https://github.com/janten/keypad-layout
+
+# Menubar
+#cask 'bitbar'
+#cask 'meteorologist'             # weather
+#cask 'syncthing-bar'
+#cask 'trailer'                   # Managing Pull Requests and Issues For GitHub
 
 # IME
 #cask 'openvanilla'
 #cask 'mcbopomofo'                # 小麥注音輸入法
 #cask 'squirrel'                  # Rime IME ( 鼠鬚管 Squirrel )
 
-# Menubar
-#cask 'meteorologist'             # weather
-#cask 'syncthing-bar'
-#cask 'trailer'                   # Managing Pull Requests and Issues For GitHub
+# Security
+cask 'little-snitch'
+cask 'oversight'                  # https://objective-see.com/products.html
+cask 'santa'
 
 # QuickLook enhancement ( GitHub repo: sindresorhus/quick-look-plugins )
 # ----------------------------------------------------------------------------
@@ -101,16 +107,21 @@ cask 'xld'                        # http://tmkk.undo.jp/xld/index_e.html
 cask 'arq'
 #cask 'superduper'
 
-# Cloud storage
+# (Cloud) Storage
 # ----------------------------------------------------------------------------
 #cask 'dropbox'
-#cask 'google-drive'
+#cask 'google-drive-file-stream'
 #cask 'google-cloud-sdk'
 
+# File Systems
+cask 'osxfuse'
+cask 'paragon-extfs'
+cask 'sshfs'
+cask 'veracrypt'
+
 # File Sharing
-#cask 'osxfuse'
-#cask 'sshfs'
 #cask 'nitroshare'
+#cask 'resilio-sync'
 #cask 'syncthing'
 
 # NAS
@@ -127,8 +138,11 @@ cask 'arq'
 cask 'atom-beta'
 #cask 'coteditor'
 cask 'foldingtext'
-#cask 'visual-studio-code'
-#cask 'rodeo'                     # http://rodeo.yhat.com/
+cask 'visual-studio-code'
+
+cask 'miniconda'                  # or 'anaconda'
+#cask 'pycharm-ce'                # Jetbrains PyCharm Community Edition
+cask 'rodeo'                      # https://www.yhat.com/products/rodeo
 #cask 'microsoft-r-open'
 #cask 'rstudio'
 
@@ -156,7 +170,6 @@ cask 'skim'
 #cask 'wkhtmltopdf'
 #cask 'yacreader'
 
-# Productivity
 # ----------------------------------------------------------------------------
 cask 'devonthink'                 # DEVONthink Personal
 #cask 'omnifocus'                 # https://www.omnigroup.com/omnifocus/
@@ -164,6 +177,7 @@ cask 'devonthink'                 # DEVONthink Personal
 # Git clients
 # ----------------------------------------------------------------------------
 cask 'fork'                       # https://git-fork.com/
+#ship                             # https://www.realartists.com/index.html
 
 # Diff and merge tools
 # ----------------------------------------------------------------------------
@@ -178,20 +192,6 @@ cask 'p4merge'
 #cask 'sqlitebrowser'
 #cask 'mysqlworkbench'
 
-# Networking
-# ----------------------------------------------------------------------------
-#cask 'angry-ip-scanner'
-#cask 'dripcap'
-#cask 'kismac'
-#cask 'whatroute'
-#cask 'wireshark'
-
-# Terminal emulators
-# ----------------------------------------------------------------------------
-# Alacritty  https://github.com/jwilm/alacritty
-cask 'hyper'                      # CJK? https://github.com/zeit/hyper/pull/1536
-cask 'iterm2-beta'
-
 # Containers & VMs
 # ----------------------------------------------------------------------------
 #cask 'virtualbox'
@@ -200,5 +200,21 @@ cask 'iterm2-beta'
 #cask 'vagrant-manager'
 #cask 'vmware-fusion'
 
+# Terminal emulators
+# ----------------------------------------------------------------------------
+# Alacritty                       # https://github.com/jwilm/alacritty
+cask 'hyper'                      # CJK? https://github.com/zeit/hyper/pull/1536
+cask 'iterm2-beta'
+
+# Networking
+# ----------------------------------------------------------------------------
+#cask 'angry-ip-scanner'
+#cask 'dripcap'
+#cask 'kismac'
+cask 'spechtlite'                 # https://github.com/zhuhaow/SpechtLite
+#cask 'whatroute'
+#cask 'wireshark'
+
 # Development tools
 # ----------------------------------------------------------------------------
+#cask 'postman'                   # HTTP client
