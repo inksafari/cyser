@@ -1,32 +1,38 @@
-# https://github.com/Rowno/dotfiles/blob/master/public/.ssh/config
+# https://blog.wu-boy.com/2016/10/ssh-agent-forwarding-proxycommand-tutorial/
+# https://github.com/jeffwidman/dotfiles/blob/master/ssh/.ssh/config
 Host *
-    Compression          yes
-    ControlMaster        auto
-    ControlPath          ~/.ssh/sockets/%r@%h:%p
-    ControlPersist       600
-    ForwardAgent         yes
-    GSSAPIAuthentication no
-    Protocol             2
-    ServerAliveInterval  300
-    TCPKeepAlive         yes
+    ControlPath         ~/.ssh/master-%r@%h:%p
+    ControlMaster       auto
+    ControlPersist      600
+    ServerAliveInterval 60
+    UseKeychain         yes
+
+Host __github
+    HostName github.com
+    IdentityFile ~/.ssh/inksafari_rsa
 
 #
 # Multiple GitHub accounts
 #
-Host git-inksafari
-    HostName github.com
-    User inksafari
-    PreferredAuthentications publickey
-    IdentityFile ~/.ssh/id_rsa_inksafari_github
+#Host git-inksafari
+#    HostName github.com
+#    User inksafari
+#    PreferredAuthentications publickey
+#    IdentityFile ~/.ssh/inksafari_rsa
 
 #
-# VPS ( region-duedate )
+# VPS
 #
-#Host slc-24may2017
+#Host slc-28may
 #    HostName 
 #    Port 
 #    User 
 #    IdentityFile ~/.ssh/id_rsa
-#    LocalForward 3000 localhost:3000
-#    LocalForward 8080 localhost:8080
-#    LocalForward 9999 192.168.1.1:80
+
+#Host luv.local
+#    User root
+
+#Host luv
+#    HostName luv.local
+#    User root
+#    ProxyCommand nohup ssh -l `whoami` EXAMPLE.org nc %h %p
