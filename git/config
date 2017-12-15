@@ -1,9 +1,3 @@
-[include]
-    path = ~/.own/inksafari.local      # for my username and email address
-
-[credential]
-    helper = osxkeychain               # for macOS
-
 [help]
     autocorrect = 1
 
@@ -406,3 +400,9 @@
     #
     publish = !"git push --set-upstream origin $(git rev-parse --abbrev-ref HEAD)"
     unpublish = !"git push origin :$(git rev-parse --abbrev-ref HEAD)"
+
+[user]
+    useConfigOnly = true
+
+[include]
+    path = ~/.own/inksafari.local      # for my username and email address
